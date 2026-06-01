@@ -1,10 +1,11 @@
 ---
 import ThemeToggle from "./ThemeToggle";
-import { APP_LOGIN_URL, languageSwitchPath, localizedPath, type SiteLang } from "../lib/links";
+import { appLoginUrl, languageSwitchPath, localizedPath, type SiteLang } from "../lib/links";
 
 const { currentPath = "/", lang = "en" } = Astro.props;
 const siteLang = lang as SiteLang;
 const isArabic = siteLang === "ar";
+const loginUrl = appLoginUrl(siteLang);
 const homePath = localizedPath(siteLang, "/");
 const pricingPath = localizedPath(siteLang, "/pricing");
 const contactPath = localizedPath(siteLang, "/contact");
@@ -51,7 +52,7 @@ const activeLink = "text-sm text-foreground";
     <div class="flex items-center gap-3">
       <a href={languageSwitchPath(siteLang, currentPath)} class="hidden rounded-full border border-border/60 bg-surface/60 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent sm:inline-flex">{labels.switch}</a>
       <ThemeToggle client:load />
-      <a href={APP_LOGIN_URL} class="inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">{labels.start}</a>
+      <a href={loginUrl} class="inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">{labels.start}</a>
     </div>
   </div>
 </header>

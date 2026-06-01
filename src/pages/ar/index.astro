@@ -3,7 +3,9 @@ import BaseLayout from "../../components/BaseLayout.astro";
 import BrowserFrame from "../../components/BrowserFrame.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
-import { APP_LOGIN_URL } from "../../lib/links";
+import { appLoginUrl } from "../../lib/links";
+
+const appLoginHref = appLoginUrl("ar");
 
 const outcomes = [
   ["اجمع عملاء محتملين مؤهلين", "تفاعل مع الزوار عندما تكون نية الشراء أو التواصل في أعلى مستوياتها، واجمع التفاصيل التي يحتاجها فريقك للمتابعة."],
@@ -70,7 +72,7 @@ const jsonLd = {
           يمنح Snoodlr نشاطك مساعدًا ذكيًا يجيب عن العملاء، يجمع العملاء المحتملين المؤهلين، ويساعد المحادثات على التحول إلى نتائج حقيقية.
         </p>
         <div class="mt-9 flex flex-wrap justify-center gap-3">
-          <a href={APP_LOGIN_URL} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">ابدأ مجانًا</a>
+          <a href={appLoginHref} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">ابدأ مجانًا</a>
           <a href="#how-it-works" class="inline-flex h-12 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-7 text-base font-medium text-foreground transition-colors hover:bg-surface">شاهد طريقة العمل</a>
         </div>
 
@@ -224,7 +226,7 @@ const jsonLd = {
                 </div>
                 <div class="space-y-2 p-3 text-xs">
                   <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">مرحبًا! هل تبحث عن شيء محدد؟</div>
-                  <div class="mr-auto max-w-[85%] rounded-xl bg-primary px-3 py-2 text-primary-foreground">هل تشحنون إلى تكساس؟</div>
+                  <div class="mr-auto max-w-[85%] rounded-xl bg-primary px-3 py-2 text-primary-foreground">هل تشحنون إلى المحافظات؟</div>
                   <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">نعم، شحن مجاني خلال يومين للطلبات فوق $50.</div>
                 </div>
               </div>
@@ -259,7 +261,7 @@ const jsonLd = {
             <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">قوّ موقع ووردبريس أو متجر WooCommerce باستخدام Snoodlr.</h2>
             <p class="mt-5 text-lg leading-relaxed text-muted-foreground">اربط Snoodlr بموقعك ليساعد العملاء بإجابات أغنى، واكتشاف المنتجات، ودعم الطلبات، ومحادثات مخصصة لنشاطك.</p>
             <div class="mt-8">
-              <a href={APP_LOGIN_URL} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">احصل على الإضافة</a>
+              <a href={appLoginHref} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">احصل على الإضافة</a>
             </div>
           </div>
           <div class="rounded-3xl border border-border-strong/60 bg-background p-8 shadow-frame">

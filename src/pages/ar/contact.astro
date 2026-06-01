@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../../components/BaseLayout.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
-import { APP_LOGIN_URL } from "../../lib/links";
+import { appLoginUrl } from "../../lib/links";
+
+const appLoginHref = appLoginUrl("ar");
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -69,12 +71,12 @@ const jsonLd = {
           <div class="rounded-2xl border border-border/60 bg-card p-6">
             <p class="text-lg font-semibold tracking-tight">ابدأ مجانًا</p>
             <p class="mt-1.5 text-sm text-muted-foreground">تجاوز النموذج وأعد مساعد أعمالك بالذكاء الاصطناعي خلال دقائق.</p>
-            <a href={APP_LOGIN_URL} class="mt-4 inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground">ابدأ مجانًا</a>
+            <a href={appLoginHref} class="mt-4 inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground">ابدأ مجانًا</a>
           </div>
           <div class="rounded-2xl border border-border/60 bg-card p-6">
             <p class="text-lg font-semibold tracking-tight">تسجيل الدخول</p>
             <p class="mt-1.5 text-sm text-muted-foreground">تستخدم Snoodlr بالفعل؟ عد إلى مساحة عملك.</p>
-            <a href={APP_LOGIN_URL} class="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-5 text-sm font-medium">تسجيل الدخول</a>
+            <a href={appLoginHref} class="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-5 text-sm font-medium">تسجيل الدخول</a>
           </div>
           <div class="rounded-2xl border border-border/60 bg-surface/40 p-6">
             <p class="text-sm font-medium text-foreground">الاستفسارات</p>

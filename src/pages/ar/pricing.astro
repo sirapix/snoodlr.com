@@ -3,7 +3,9 @@ import BaseLayout from "../../components/BaseLayout.astro";
 import CheckIcon from "../../components/CheckIcon.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
-import { APP_LOGIN_URL } from "../../lib/links";
+import { appLoginUrl } from "../../lib/links";
+
+const appLoginHref = appLoginUrl("ar");
 
 const plans = [
   {
@@ -12,7 +14,7 @@ const plans = [
     cadence: "دائمًا",
     description: "جرّب Snoodlr على موقعك دون أي التزام.",
     cta: "ابدأ مجانًا",
-    href: APP_LOGIN_URL,
+    href: appLoginHref,
     featured: false,
     features: ["مساعد ذكاء اصطناعي واحد", "حتى 100 محادثة شهريًا", "ودجت الموقع", "جمع عملاء محتملين أساسي", "إشعارات بالبريد الإلكتروني"]
   },
@@ -22,7 +24,7 @@ const plans = [
     cadence: "/ شهريًا",
     description: "للأنشطة الصغيرة الجاهزة للنمو.",
     cta: "ابدأ الأساسية",
-    href: APP_LOGIN_URL,
+    href: appLoginHref,
     featured: true,
     features: ["مساعد ذكاء اصطناعي واحد", "حتى 2,000 محادثة شهريًا", "ودجت الموقع + إضافة ووردبريس", "جمع وتوجيه متقدم للعملاء", "نبرة مخصصة للنشاط", "دعم بريد إلكتروني بأولوية"]
   },
@@ -32,7 +34,7 @@ const plans = [
     cadence: "/ شهريًا",
     description: "للفرق التي تحتاج إلى حجم وتحكم أكبر.",
     cta: "ابدأ الأعمال",
-    href: APP_LOGIN_URL,
+    href: appLoginHref,
     featured: false,
     features: ["3 مساعدين بالذكاء الاصطناعي", "محادثات غير محدودة", "ودجت الموقع + ووردبريس + API", "جمع عملاء متقدم ومزامنة CRM", "نبرة وتدفقات مخصصة", "تعاون الفريق والتحويلات", "دعم بأولوية", "لوحة تحليلات"]
   },

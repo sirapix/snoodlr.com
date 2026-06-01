@@ -1,9 +1,11 @@
 ---
-import { APP_LOGIN_URL } from "../lib/links";
+import { appLoginUrl } from "../lib/links";
 import type { SiteLang } from "../lib/links";
 
 const { contactHref = "/contact", lang = "en" } = Astro.props;
-const isArabic = (lang as SiteLang) === "ar";
+const siteLang = lang as SiteLang;
+const isArabic = siteLang === "ar";
+const loginUrl = appLoginUrl(siteLang);
 const labels = isArabic
   ? {
       title: "ابدأ بتحويل المحادثات إلى نتائج.",
@@ -26,7 +28,7 @@ const labels = isArabic
       <h2 class="text-balance text-4xl font-semibold tracking-tight md:text-5xl">{labels.title}</h2>
       <p class="mx-auto mt-4 max-w-xl text-muted-foreground">{labels.description}</p>
       <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href={APP_LOGIN_URL} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">{labels.start}</a>
+        <a href={loginUrl} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">{labels.start}</a>
         <a href={contactHref} class="inline-flex h-12 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-7 text-base font-medium text-foreground transition-colors hover:bg-surface">{labels.contact}</a>
       </div>
     </div>
