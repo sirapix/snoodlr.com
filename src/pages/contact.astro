@@ -38,7 +38,21 @@ const jsonLd = {
       </div>
 
       <div class="mt-14 grid gap-8 md:grid-cols-5">
-        <form class="rounded-3xl border border-border/60 bg-card p-7 md:col-span-3 md:p-9" action="mailto:hello@snoodlr.com" enctype="text/plain" method="post">
+        <form
+          class="rounded-3xl border border-border/60 bg-card p-7 md:col-span-3 md:p-9"
+          action="/api/contact"
+          method="post"
+          data-contact-form
+          data-success="Thanks - your message has been sent."
+          data-error="We could not send your message. Please try again."
+          data-sending="Sending..."
+        >
+          <input type="hidden" name="locale" value="en" />
+          <input type="hidden" name="path" value="/contact" />
+          <label class="hidden" aria-hidden="true">
+            Website
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </label>
           <div class="grid gap-5">
             <label class="block">
               <span class="mb-2 block text-sm font-medium text-foreground">Your name</span>
@@ -57,9 +71,10 @@ const jsonLd = {
               <textarea required name="message" rows="5" class="w-full rounded-lg border border-border bg-input/40 px-4 py-3 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="Tell us a bit about your business and what you're looking for."></textarea>
             </label>
           </div>
+          <p data-contact-status class="mt-5 hidden rounded-xl border px-4 py-3 text-sm" role="status" aria-live="polite"></p>
           <div class="mt-7 flex flex-wrap items-center gap-3">
-            <button type="submit" class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">Send message</button>
-            <a href="mailto:hello@snoodlr.com" class="text-sm text-muted-foreground hover:text-foreground">Or email hello@snoodlr.com</a>
+            <button type="submit" data-contact-submit class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02] disabled:cursor-wait disabled:opacity-70">Send message</button>
+            <p class="text-sm text-muted-foreground">We'll reply to the email you enter.</p>
           </div>
         </form>
 
@@ -86,4 +101,69 @@ const jsonLd = {
       </div>
     </div>
   </main>
+  <script>
+    document.querySelectorAll("[data-contact-form]").forEach((form) => {
+      if (!(form instanceof HTMLFormElement)) return;
+
+      const status = form.querySelector("[data-contact-status]");
+      const submit = form.querySelector("[data-contact-submit]");
+      const button = submit instanceof HTMLButtonElement ? submit : null;
+      const originalButtonText = button?.textContent ?? "";
+
+      const setStatus = (message, type) => {
+        if (!(status instanceof HTMLElement)) return;
+
+        status.textContent = message;
+        status.className = "mt-5 rounded-xl border px-4 py-3 text-sm";
+
+        if (!message) {
+          status.classList.add("hidden");
+          return;
+        }
+
+        status.classList.add(
+          type === "success" ? "border-primary/30" : "border-red-500/30",
+          type === "success" ? "bg-primary/10" : "bg-red-500/10",
+          "text-foreground"
+        );
+      };
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+
+        setStatus("", "success");
+        if (button) {
+          button.disabled = true;
+          button.textContent = form.dataset.sending || originalButtonText;
+        }
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            headers: {
+              Accept: "application/json"
+            },
+            body: new FormData(form)
+          });
+          const payload = await response.json().catch(() => ({}));
+
+          if (!response.ok || !payload.ok) {
+            throw new Error(payload.message || form.dataset.error || "We could not send your message.");
+          }
+
+          form.reset();
+          setStatus(form.dataset.success || "Message sent.", "success");
+        } catch (error) {
+          const message = error instanceof Error ? error.message : form.dataset.error || "We could not send your message.";
+          setStatus(message, "error");
+        } finally {
+          if (button) {
+            button.disabled = false;
+            button.textContent = originalButtonText;
+          }
+        }
+      });
+    });
+  </script>
 </BaseLayout>
