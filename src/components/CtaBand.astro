@@ -1,18 +1,33 @@
 ---
 import { APP_LOGIN_URL } from "../lib/links";
+import type { SiteLang } from "../lib/links";
 
-const { contactHref = "/contact" } = Astro.props;
+const { contactHref = "/contact", lang = "en" } = Astro.props;
+const isArabic = (lang as SiteLang) === "ar";
+const labels = isArabic
+  ? {
+      title: "ابدأ بتحويل المحادثات إلى نتائج.",
+      description: "أعد مساعد أعمالك بالذكاء الاصطناعي خلال دقائق. اجمع عملاء محتملين أكثر، ورد بسرعة، وادفع العملاء نحو نتائج حقيقية.",
+      start: "ابدأ مجانًا",
+      contact: "تواصل معنا"
+    }
+  : {
+      title: "Start turning conversations into outcomes.",
+      description: "Set up your AI business assistant in minutes. Capture more leads, answer faster, and move customers toward real results.",
+      start: "Start free",
+      contact: "Contact us"
+    };
 ---
 
 <section id="start" class="relative px-6 py-20 md:py-28">
   <div class="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-border-strong/60 bg-gradient-to-br from-surface to-background p-10 text-center shadow-frame md:p-16">
     <div class="pointer-events-none absolute inset-0 bg-hero-glow opacity-80"></div>
     <div class="relative">
-      <h2 class="text-balance text-4xl font-semibold tracking-tight md:text-5xl">Start turning conversations into outcomes.</h2>
-      <p class="mx-auto mt-4 max-w-xl text-muted-foreground">Set up your AI business assistant in minutes. Capture more leads, answer faster, and move customers toward real results.</p>
+      <h2 class="text-balance text-4xl font-semibold tracking-tight md:text-5xl">{labels.title}</h2>
+      <p class="mx-auto mt-4 max-w-xl text-muted-foreground">{labels.description}</p>
       <div class="mt-8 flex flex-wrap justify-center gap-3">
-        <a href={APP_LOGIN_URL} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">Start free</a>
-        <a href={contactHref} class="inline-flex h-12 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-7 text-base font-medium text-foreground transition-colors hover:bg-surface">Contact us</a>
+        <a href={APP_LOGIN_URL} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">{labels.start}</a>
+        <a href={contactHref} class="inline-flex h-12 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-7 text-base font-medium text-foreground transition-colors hover:bg-surface">{labels.contact}</a>
       </div>
     </div>
   </div>

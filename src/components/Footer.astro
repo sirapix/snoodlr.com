@@ -1,25 +1,52 @@
 ---
-const { currentPath = "/" } = Astro.props;
-const isContact = currentPath.startsWith("/contact");
+import { localizedPath, type SiteLang } from "../lib/links";
+
+const { currentPath = "/", lang = "en" } = Astro.props;
+const siteLang = lang as SiteLang;
+const isArabic = siteLang === "ar";
+const homePath = localizedPath(siteLang, "/");
+const contactPath = localizedPath(siteLang, "/contact");
+const isContact = currentPath.endsWith("/contact");
+const labels = isArabic
+  ? {
+      tagline: "محادثات مفيدة. نتائج حقيقية.",
+      how: "طريقة العمل",
+      cases: "الاستخدامات",
+      wordpress: "ووردبريس",
+      contact: "تواصل معنا",
+      rights: "جميع الحقوق محفوظة.",
+      description: "مساعد أعمال بالذكاء الاصطناعي للعملاء المحتملين والطلبات والدعم."
+    }
+  : {
+      tagline: "Helpful conversations. Real results.",
+      how: "How it works",
+      cases: "Use cases",
+      wordpress: "WordPress",
+      contact: "Contact",
+      rights: "All rights reserved.",
+      description: "AI business assistant for leads, orders, and support."
+    };
 ---
 
 <footer class="border-t border-border/60 bg-background">
   <div class="mx-auto max-w-7xl px-6 py-12">
     <div class="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
       <div>
-        <p class="font-display text-lg font-semibold tracking-tight">Snoodlr</p>
-        <p class="mt-1 text-sm text-muted-foreground">Helpful conversations. Real results.</p>
+        <a href={homePath} class="inline-flex" aria-label="Snoodlr home">
+          <img src="/assets/snoodlr-logo.svg" alt="Snoodlr" class="h-8 w-auto dark:brightness-0 dark:invert" />
+        </a>
+        <p class="mt-1 text-sm text-muted-foreground">{labels.tagline}</p>
       </div>
       <nav class="flex flex-wrap gap-6 text-sm text-muted-foreground" aria-label="Footer">
-        <a href="/#how-it-works" class="hover:text-foreground">How it works</a>
-        <a href="/#use-cases" class="hover:text-foreground">Use cases</a>
-        <a href="/#wordpress" class="hover:text-foreground">WordPress</a>
-        <a href="/contact" class={isContact ? "text-foreground" : "hover:text-foreground"} aria-current={isContact ? "page" : undefined}>Contact</a>
+        <a href={`${homePath}#how-it-works`} class="hover:text-foreground">{labels.how}</a>
+        <a href={`${homePath}#use-cases`} class="hover:text-foreground">{labels.cases}</a>
+        <a href={`${homePath}#wordpress`} class="hover:text-foreground">{labels.wordpress}</a>
+        <a href={contactPath} class={isContact ? "text-foreground" : "hover:text-foreground"} aria-current={isContact ? "page" : undefined}>{labels.contact}</a>
       </nav>
     </div>
     <div class="mt-10 flex flex-col items-start justify-between gap-3 border-t border-border/60 pt-6 text-xs text-muted-foreground md:flex-row md:items-center">
-      <p>&copy; 2026 Snoodlr. All rights reserved.</p>
-      <p>AI business assistant for leads, orders, and support.</p>
+      <p>&copy; 2026 Snoodlr. {labels.rights}</p>
+      <p>{labels.description}</p>
     </div>
   </div>
 </footer>

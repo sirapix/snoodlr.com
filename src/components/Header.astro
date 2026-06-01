@@ -1,30 +1,57 @@
 ---
 import ThemeToggle from "./ThemeToggle";
-import { APP_LOGIN_URL } from "../lib/links";
+import { APP_LOGIN_URL, languageSwitchPath, localizedPath, type SiteLang } from "../lib/links";
 
-const { currentPath = "/" } = Astro.props;
-const isPricing = currentPath.startsWith("/pricing");
-const isContact = currentPath.startsWith("/contact");
+const { currentPath = "/", lang = "en" } = Astro.props;
+const siteLang = lang as SiteLang;
+const isArabic = siteLang === "ar";
+const homePath = localizedPath(siteLang, "/");
+const pricingPath = localizedPath(siteLang, "/pricing");
+const contactPath = localizedPath(siteLang, "/contact");
+const howPath = `${homePath}#how-it-works`;
+const casesPath = `${homePath}#use-cases`;
+const isPricing = currentPath.endsWith("/pricing");
+const isContact = currentPath.endsWith("/contact");
+const labels = isArabic
+  ? {
+      home: "الصفحة الرئيسية",
+      how: "طريقة العمل",
+      cases: "الاستخدامات",
+      pricing: "الأسعار",
+      contact: "تواصل معنا",
+      start: "ابدأ مجانًا",
+      switch: "English"
+    }
+  : {
+      home: "Snoodlr home",
+      how: "How it works",
+      cases: "Use cases",
+      pricing: "Pricing",
+      contact: "Contact",
+      start: "Start free",
+      switch: "العربية"
+    };
 const navLink = "text-sm text-muted-foreground transition-colors hover:text-foreground";
 const activeLink = "text-sm text-foreground";
 ---
 
 <header class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
   <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-    <a aria-label="Snoodlr home" href="/" class="flex items-center gap-2">
-      <img src="/assets/snoodlr-logo.png" alt="Snoodlr" class="h-7 w-auto dark:brightness-0 dark:invert" />
+    <a aria-label={labels.home} href={homePath} class="flex items-center gap-2">
+        <img src="/assets/snoodlr-logo.svg" alt="Snoodlr" class="h-7 w-auto dark:brightness-0 dark:invert" />
     </a>
 
     <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
-      <a href="/#how-it-works" class={navLink}>How it works</a>
-      <a href="/#use-cases" class={navLink}>Use cases</a>
-      <a href="/pricing" class={isPricing ? activeLink : navLink} aria-current={isPricing ? "page" : undefined}>Pricing</a>
-      <a href="/contact" class={isContact ? activeLink : navLink} aria-current={isContact ? "page" : undefined}>Contact</a>
+      <a href={howPath} class={navLink}>{labels.how}</a>
+      <a href={casesPath} class={navLink}>{labels.cases}</a>
+      <a href={pricingPath} class={isPricing ? activeLink : navLink} aria-current={isPricing ? "page" : undefined}>{labels.pricing}</a>
+      <a href={contactPath} class={isContact ? activeLink : navLink} aria-current={isContact ? "page" : undefined}>{labels.contact}</a>
     </nav>
 
     <div class="flex items-center gap-3">
+      <a href={languageSwitchPath(siteLang, currentPath)} class="hidden rounded-full border border-border/60 bg-surface/60 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent sm:inline-flex">{labels.switch}</a>
       <ThemeToggle client:load />
-      <a href={APP_LOGIN_URL} class="inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">Start free</a>
+      <a href={APP_LOGIN_URL} class="inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">{labels.start}</a>
     </div>
   </div>
 </header>

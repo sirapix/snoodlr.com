@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import Eyebrow from "../../components/Eyebrow.astro";
+import { APP_LOGIN_URL } from "../../lib/links";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "تواصل مع Snoodlr",
+  url: "https://snoodlr.com/ar/contact",
+  inLanguage: "ar",
+  about: {
+    "@type": "SoftwareApplication",
+    name: "Snoodlr"
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "hello@snoodlr.com",
+    contactType: "customer support"
+  }
+};
+---
+
+<BaseLayout
+  lang="ar"
+  title="تواصل مع Snoodlr - الدعم والشراكات واستفسارات الأعمال"
+  description="تحدث مع فريق Snoodlr بخصوص الدعم أو الشراكات أو استفسارات الأعمال، أو ابدأ مجانًا خلال دقائق."
+  ogTitle="تواصل مع Snoodlr"
+  ogDescription="لنتحدث عن Snoodlr: الدعم، الشراكات، واستفسارات الأعمال."
+  path="/ar/contact"
+  jsonLd={jsonLd}
+>
+  <main class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 bg-hero-glow"></div>
+    <div class="relative mx-auto max-w-6xl px-6 pb-24 pt-20 md:pt-28">
+      <div class="max-w-2xl">
+        <Eyebrow label="تواصل معنا" />
+        <h1 class="mt-6 text-balance text-5xl font-semibold tracking-tight md:text-6xl">لنتحدث عن Snoodlr.</h1>
+        <p class="mt-5 text-lg leading-relaxed text-muted-foreground">سواء كنت تحتاج إلى دعم، أو تريد استكشاف شراكة، أو لديك سؤال تجاري، نحن هنا. راسلنا وسنعود إليك بسرعة.</p>
+      </div>
+
+      <div class="mt-14 grid gap-8 md:grid-cols-5">
+        <form class="rounded-3xl border border-border/60 bg-card p-7 md:col-span-3 md:p-9" action="mailto:hello@snoodlr.com" enctype="text/plain" method="post">
+          <div class="grid gap-5">
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-foreground">اسمك</span>
+              <input required type="text" class="h-11 w-full rounded-lg border border-border bg-input/40 px-4 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="الاسم" name="name" />
+            </label>
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-foreground">البريد الإلكتروني</span>
+              <input required type="email" class="h-11 w-full rounded-lg border border-border bg-input/40 px-4 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="you@business.com" name="email" dir="ltr" />
+            </label>
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-foreground">الشركة (اختياري)</span>
+              <input type="text" class="h-11 w-full rounded-lg border border-border bg-input/40 px-4 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="اسم الشركة" name="company" />
+            </label>
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-foreground">كيف يمكننا مساعدتك؟</span>
+              <textarea required name="message" rows="5" class="w-full rounded-lg border border-border bg-input/40 px-4 py-3 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="أخبرنا قليلًا عن نشاطك وما الذي تبحث عنه."></textarea>
+            </label>
+          </div>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <button type="submit" class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">إرسال الرسالة</button>
+            <a href="mailto:hello@snoodlr.com" class="text-sm text-muted-foreground hover:text-foreground">أو راسلنا على hello@snoodlr.com</a>
+          </div>
+        </form>
+
+        <aside class="space-y-4 md:col-span-2">
+          <div class="rounded-2xl border border-border/60 bg-card p-6">
+            <p class="text-lg font-semibold tracking-tight">ابدأ مجانًا</p>
+            <p class="mt-1.5 text-sm text-muted-foreground">تجاوز النموذج وأعد مساعد أعمالك بالذكاء الاصطناعي خلال دقائق.</p>
+            <a href={APP_LOGIN_URL} class="mt-4 inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground">ابدأ مجانًا</a>
+          </div>
+          <div class="rounded-2xl border border-border/60 bg-card p-6">
+            <p class="text-lg font-semibold tracking-tight">تسجيل الدخول</p>
+            <p class="mt-1.5 text-sm text-muted-foreground">تستخدم Snoodlr بالفعل؟ عد إلى مساحة عملك.</p>
+            <a href={APP_LOGIN_URL} class="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-5 text-sm font-medium">تسجيل الدخول</a>
+          </div>
+          <div class="rounded-2xl border border-border/60 bg-surface/40 p-6">
+            <p class="text-sm font-medium text-foreground">الاستفسارات</p>
+            <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li>الدعم - المساعدة في حسابك</li>
+              <li>الشراكات - التكاملات والموزعون</li>
+              <li>الأعمال - الوكالات والتنفيذ المخصص</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

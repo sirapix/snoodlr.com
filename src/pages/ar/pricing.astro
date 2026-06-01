@@ -1,0 +1,167 @@
+---
+import BaseLayout from "../../components/BaseLayout.astro";
+import CheckIcon from "../../components/CheckIcon.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import Eyebrow from "../../components/Eyebrow.astro";
+import { APP_LOGIN_URL } from "../../lib/links";
+
+const plans = [
+  {
+    name: "المجانية",
+    price: "$0",
+    cadence: "دائمًا",
+    description: "جرّب Snoodlr على موقعك دون أي التزام.",
+    cta: "ابدأ مجانًا",
+    href: APP_LOGIN_URL,
+    featured: false,
+    features: ["مساعد ذكاء اصطناعي واحد", "حتى 100 محادثة شهريًا", "ودجت الموقع", "جمع عملاء محتملين أساسي", "إشعارات بالبريد الإلكتروني"]
+  },
+  {
+    name: "الأساسية",
+    price: "$15",
+    cadence: "/ شهريًا",
+    description: "للأنشطة الصغيرة الجاهزة للنمو.",
+    cta: "ابدأ الأساسية",
+    href: APP_LOGIN_URL,
+    featured: true,
+    features: ["مساعد ذكاء اصطناعي واحد", "حتى 2,000 محادثة شهريًا", "ودجت الموقع + إضافة ووردبريس", "جمع وتوجيه متقدم للعملاء", "نبرة مخصصة للنشاط", "دعم بريد إلكتروني بأولوية"]
+  },
+  {
+    name: "الأعمال",
+    price: "$50",
+    cadence: "/ شهريًا",
+    description: "للفرق التي تحتاج إلى حجم وتحكم أكبر.",
+    cta: "ابدأ الأعمال",
+    href: APP_LOGIN_URL,
+    featured: false,
+    features: ["3 مساعدين بالذكاء الاصطناعي", "محادثات غير محدودة", "ودجت الموقع + ووردبريس + API", "جمع عملاء متقدم ومزامنة CRM", "نبرة وتدفقات مخصصة", "تعاون الفريق والتحويلات", "دعم بأولوية", "لوحة تحليلات"]
+  },
+  {
+    name: "المؤسسات",
+    price: "مخصص",
+    cadence: "",
+    description: "إعداد مخصص، واتفاقيات خدمة، وتنفيذ خاص.",
+    cta: "تواصل مع المبيعات",
+    href: "/ar/contact",
+    featured: false,
+    features: ["مساعدون غير محدودين", "محادثات غير محدودة", "كل التكاملات + تنفيذات مخصصة", "مدير حساب مخصص", "SSO وأمان متقدم", "تدريب ذكاء اصطناعي على بياناتك", "ضمان SLA", "تأهيل كامل بمساعدة الفريق"]
+  }
+];
+
+const rows = [
+  ["المحادثات", "100/شهر", "2,000/شهر", "غير محدود", "غير محدود"],
+  ["مساعدو الذكاء الاصطناعي", "1", "1", "3", "غير محدود"],
+  ["ودجت الموقع", true, true, true, true],
+  ["إضافة ووردبريس", false, true, true, true],
+  ["وصول API", false, false, true, true],
+  ["نبرة وتدفقات مخصصة", false, true, true, true],
+  ["CRM / تحويلات للفريق", false, false, true, true],
+  ["لوحة التحليلات", false, false, true, true],
+  ["دعم بأولوية", false, true, true, true],
+  ["مدير حساب مخصص", false, false, false, true],
+  ["SSO وأمان متقدم", false, false, false, true],
+  ["تدريب ذكاء اصطناعي مخصص", false, false, false, true],
+  ["ضمان SLA", false, false, false, true]
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Snoodlr",
+  applicationCategory: "BusinessApplication",
+  url: "https://snoodlr.com/ar/pricing",
+  inLanguage: "ar",
+  offers: plans.map((plan) => ({
+    "@type": "Offer",
+    name: plan.name,
+    price: plan.price.startsWith("$") ? plan.price.replace("$", "") : "0",
+    priceCurrency: "USD"
+  }))
+};
+---
+
+<BaseLayout
+  lang="ar"
+  title="الأسعار - Snoodlr مساعد أعمال بالذكاء الاصطناعي"
+  description="أسعار بسيطة وواضحة لـ Snoodlr. ابدأ مجانًا ثم توسع مع خطط الأساسية أو الأعمال. للمؤسسات، تواصل معنا."
+  ogTitle="الأسعار - Snoodlr"
+  ogDescription="أسعار بسيطة لمساعد أعمالك بالذكاء الاصطناعي: مجانية، أساسية، أعمال، ومؤسسات."
+  path="/ar/pricing"
+  jsonLd={jsonLd}
+>
+  <main class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 bg-hero-glow"></div>
+
+    <section class="relative py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mx-auto max-w-3xl text-center">
+          <Eyebrow label="الأسعار" />
+          <h1 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">أسعار بسيطة. نتائج جدية.</h1>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">ابدأ مجانًا وقم بالترقية عندما تكون جاهزًا. بدون رسوم مخفية وبدون التزام سنوي.</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {plans.map((plan) => (
+            <div class={`relative flex flex-col rounded-3xl border p-7 ${plan.featured ? "border-primary/60 bg-card shadow-frame" : "border-border/60 bg-card/60"}`}>
+              {plan.featured && <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-xs font-semibold text-primary-foreground">الأكثر اختيارًا</span>}
+              <div class="flex-1">
+                <h2 class="text-lg font-semibold tracking-tight">{plan.name}</h2>
+                <div class="mt-2 flex items-baseline gap-1">
+                  <span class="text-4xl font-semibold tracking-tight">{plan.price}</span>
+                  {plan.cadence && <span class="text-sm text-muted-foreground">{plan.cadence}</span>}
+                </div>
+                <p class="mt-2 text-sm text-muted-foreground">{plan.description}</p>
+                <ul class="mt-6 space-y-2.5">
+                  {plan.features.map((feature) => (
+                    <li class="flex items-start gap-2 text-sm text-foreground">
+                      <CheckIcon />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a href={plan.href} class={`mt-7 inline-flex h-11 w-full items-center justify-center rounded-full text-sm font-semibold transition-transform hover:scale-[1.02] ${plan.featured ? "bg-primary text-primary-foreground shadow-soft" : "border border-border-strong bg-surface/60 text-foreground hover:bg-surface"}`}>{plan.cta}</a>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-8 text-center text-sm text-muted-foreground">كل الخطط المدفوعة تشمل تجربة مجانية لمدة 14 يومًا. لا حاجة لبطاقة ائتمان للبدء. يمكنك الإلغاء في أي وقت.</p>
+      </div>
+    </section>
+
+    <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
+          <Eyebrow label="المقارنة" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">ما الذي تتضمنه الخطط؟</h2>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">كل خطة تمنحك تجربة Snoodlr الأساسية. قم بالترقية لمزيد من الحجم والمساعدين والتحكم.</p>
+        </div>
+
+        <div class="mt-12 overflow-x-auto">
+          <table class="w-full min-w-[640px] text-right text-sm">
+            <thead>
+              <tr class="border-b border-border-strong">
+                <th class="py-3 pl-4 font-medium text-muted-foreground">الميزة</th>
+                {plans.map((plan) => <th class="px-4 py-3 font-semibold text-foreground">{plan.name}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([label, free, essential, business, enterprise]) => (
+                <tr class="border-b border-border/40">
+                  <td class="py-3 pl-4 font-medium text-foreground">{label}</td>
+                  {[free, essential, business, enterprise].map((value) => (
+                    <td class="px-4 py-3 text-muted-foreground">
+                      {value === true ? <CheckIcon /> : value === false ? <span class="text-muted-foreground/40">&mdash;</span> : <span>{value}</span>}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <CtaBand lang="ar" contactHref="/ar/contact" />
+  </main>
+</BaseLayout>
