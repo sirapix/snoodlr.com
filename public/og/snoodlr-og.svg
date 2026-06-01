@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Snoodlr AI business assistant</title>
+  <desc id="desc">Snoodlr turns customer conversations into leads, orders, and support.</desc>
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="10%" r="70%">
+      <stop offset="0%" stop-color="#12c68f" stop-opacity="0.42"/>
+      <stop offset="55%" stop-color="#0a1713" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#06100d"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#153229"/>
+      <stop offset="100%" stop-color="#07130f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g opacity="0.18" stroke="#7fd8bb">
+    <path d="M0 82h1200M0 164h1200M0 246h1200M0 328h1200M0 410h1200M0 492h1200M0 574h1200"/>
+    <path d="M96 0v630M192 0v630M288 0v630M384 0v630M480 0v630M576 0v630M672 0v630M768 0v630M864 0v630M960 0v630M1056 0v630"/>
+  </g>
+  <rect x="90" y="76" width="1020" height="478" rx="36" fill="url(#panel)" stroke="#2f5d4e"/>
+  <text x="140" y="168" fill="#f1fff9" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="700">Snoodlr</text>
+  <circle cx="110" cy="153" r="18" fill="#12c68f"/>
+  <circle cx="104" cy="153" r="4" fill="#052018"/>
+  <circle cx="116" cy="153" r="4" fill="#052018"/>
+  <text x="140" y="266" fill="#f1fff9" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="76" font-weight="700">Turn customer</text>
+  <text x="140" y="352" fill="#f1fff9" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="76" font-weight="700">conversations into</text>
+  <text x="140" y="438" fill="#12c68f" font-family="Space Grotesk, Inter, Arial, sans-serif" font-size="76" font-weight="700">leads, orders, support.</text>
+  <rect x="808" y="132" width="244" height="330" rx="26" fill="#06100d" stroke="#2f5d4e"/>
+  <rect x="832" y="162" width="196" height="44" rx="22" fill="#12c68f"/>
+  <text x="854" y="191" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700">Snoodlr Assistant</text>
+  <rect x="832" y="232" width="144" height="38" rx="18" fill="#153229" stroke="#2f5d4e"/>
+  <rect x="878" y="286" width="150" height="38" rx="18" fill="#12c68f"/>
+  <rect x="832" y="340" width="172" height="38" rx="18" fill="#153229" stroke="#2f5d4e"/>
+  <rect x="832" y="410" width="196" height="24" rx="12" fill="#12c68f" opacity="0.26"/>
+</svg>

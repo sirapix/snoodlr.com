@@ -1,0 +1,304 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import BrowserFrame from "../components/BrowserFrame.astro";
+import CheckIcon from "../components/CheckIcon.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import { APP_LOGIN_URL } from "../lib/links";
+
+const outcomes = [
+  ["Capture qualified leads", "Engage visitors the moment intent is highest and collect the details you need to follow up."],
+  ["Answer common questions instantly", "Snoodlr replies in seconds with answers grounded in your business, not generic AI fluff."],
+  ["Guide customers to the next step", "From browsing to booking, your assistant nudges customers toward the action that matters."],
+  ["Support orders and follow-ups", "Handle order questions, post-purchase support, and reminders without growing your team."],
+  ["Work from your website", "Drop Snoodlr onto any site and let it work where your customers already are."]
+];
+
+const useCases = [
+  ["Local businesses", "Answer questions, capture inquiries, and book more visits."],
+  ["Online stores", "Help shoppers find the right product and complete the order."],
+  ["Service providers", "Qualify leads and route the right ones to your team."],
+  ["Clinics & appointments", "Triage questions and help patients book the right slot."],
+  ["Agencies & client sites", "Deploy Snoodlr across client websites with isolated data."]
+];
+
+const businessPoints = [
+  "Built for business conversations",
+  "Designed for leads, orders, and support",
+  "Controlled assistant actions",
+  "Human handoff when needed",
+  "Tenant-scoped business data"
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Snoodlr",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: "https://snoodlr.com/",
+  description: "AI business assistant that turns customer conversations into leads, orders, and support outcomes.",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD"
+  }
+};
+---
+
+<BaseLayout
+  title="Snoodlr - AI business assistant for leads, orders, and support"
+  description="Snoodlr is an AI business assistant that turns customer conversations into qualified leads, orders, and support outcomes - right from your website."
+  ogTitle="Snoodlr - AI business assistant"
+  ogDescription="Turn customer conversations into leads, orders, and support. Snoodlr answers customers instantly and helps move them toward real outcomes."
+  path="/"
+  jsonLd={jsonLd}
+>
+  <main>
+    <section class="relative overflow-hidden pt-16 md:pt-24">
+      <div class="pointer-events-none absolute inset-0 bg-hero-glow"></div>
+      <div class="pointer-events-none absolute inset-0 bg-grid opacity-40 [mask-image:radial-gradient(ellipse_at_top,black_30%,transparent_70%)]"></div>
+      <div class="relative mx-auto max-w-7xl px-6 pb-20 text-center">
+        <div class="mx-auto flex justify-center">
+          <Eyebrow label="AI business assistant" />
+        </div>
+        <h1 class="mx-auto mt-6 max-w-4xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
+          Turn customer conversations into <span class="text-primary">leads, orders, and support.</span>
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+          Snoodlr gives your business an AI assistant that answers customers, captures qualified leads, and helps move conversations toward real outcomes.
+        </p>
+        <div class="mt-9 flex flex-wrap justify-center gap-3">
+          <a href={APP_LOGIN_URL} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">Start free</a>
+          <a href="#how-it-works" class="inline-flex h-12 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-7 text-base font-medium text-foreground transition-colors hover:bg-surface">See how it works</a>
+        </div>
+
+        <div class="relative mt-20">
+          <div class="pointer-events-none absolute -inset-x-20 -inset-y-10 bg-hero-glow opacity-60"></div>
+          <div class="relative">
+            <BrowserFrame title="snoodlr.app - Inbox" class="mx-auto w-full max-w-3xl">
+              <div class="grid grid-cols-12 gap-0 text-sm">
+                <aside class="col-span-4 hidden border-r border-border/60 p-5 md:block">
+                  <div class="mb-4 flex items-center gap-2">
+                    <div class="h-7 w-7 rounded-md bg-primary/20 ring-1 ring-primary/40"></div>
+                    <div class="h-3 w-20 rounded bg-muted"></div>
+                  </div>
+                  {[
+                    ["New leads", "12", true],
+                    ["Active chats", "4", false],
+                    ["Orders", "7", false],
+                    ["Follow-ups", "3", false]
+                  ].map(([label, value, active]) => (
+                    <div class={`mb-1 flex items-center justify-between rounded-lg px-3 py-2 ${active ? "bg-primary/10 text-foreground" : "text-muted-foreground"}`}>
+                      <span>{label}</span>
+                      <span class="rounded-full bg-surface px-2 py-0.5 text-xs">{value}</span>
+                    </div>
+                  ))}
+                </aside>
+                <div class="col-span-12 p-5 md:col-span-8">
+                  <div class="mb-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p class="font-semibold">Maya from Brooklyn</p>
+                      <p class="text-xs text-muted-foreground">Visiting /pricing &middot; just now</p>
+                    </div>
+                    <span class="rounded-full bg-primary/15 px-2.5 py-1 text-xs font-medium text-primary">Qualified lead</span>
+                  </div>
+                  <div class="space-y-3">
+                    <div class="flex justify-start">
+                      <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">Hi! Do you offer same-day delivery in NYC?</div>
+                    </div>
+                    <div class="flex justify-end">
+                      <div class="max-w-[78%] rounded-2xl bg-primary px-4 py-2.5 text-sm leading-relaxed text-primary-foreground">Yes - within Brooklyn and Manhattan for orders before 2pm. Want me to put one together for you?</div>
+                    </div>
+                    <div class="flex justify-start">
+                      <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">Yes please, 2 of the medium bouquets.</div>
+                    </div>
+                    <div class="rounded-xl border border-primary/30 bg-primary/5 p-3 text-xs text-muted-foreground">
+                      <span class="font-medium text-primary">Snoodlr</span> created an order draft &middot; $98.00 &middot; ready to confirm
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </BrowserFrame>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="grid items-center gap-12 md:grid-cols-2">
+          <div class="max-w-3xl">
+            <Eyebrow label="The problem" />
+            <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Customers ask, wait, <span class="text-muted-foreground">and quietly leave.</span></h2>
+            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Most websites lose conversations before they ever turn into business. A pricing question, a delivery question, an availability check - every minute of silence costs you a customer.</p>
+          </div>
+          <div class="rounded-3xl border border-border/60 bg-surface/60 p-8 md:p-10">
+            <p class="text-2xl font-medium leading-snug tracking-tight md:text-3xl">Snoodlr responds instantly and captures intent while it's high - so the conversation actually becomes an outcome.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
+          <Eyebrow label="Outcomes, not features" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">What Snoodlr actually does for your business.</h2>
+        </div>
+        <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {outcomes.map(([title, description], index) => (
+            <div class="group relative rounded-2xl border border-border/60 bg-card p-7 transition-colors hover:border-primary/40">
+              <div class="mb-5 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/15 text-sm font-semibold text-primary">{String(index + 1).padStart(2, "0")}</div>
+              <h3 class="text-xl font-semibold tracking-tight">{title}</h3>
+              <p class="mt-2 text-muted-foreground">{description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-20 md:py-28" id="how-it-works">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
+          <Eyebrow label="How it works" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Live in minutes. Helpful from day one.</h2>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          {[
+            ["Add your business", "Tell Snoodlr who you are, what you sell, and how you help customers."],
+            ["Connect your website or content", "Point Snoodlr at your site, docs, or product catalog so it answers with your truth."],
+            ["Snoodlr starts helping customers", "Your assistant goes live - answering, capturing, and converting around the clock."]
+          ].map(([title, description], index) => (
+            <div class="relative overflow-hidden rounded-2xl border border-border/60 bg-card p-8">
+              <p class="font-display text-6xl font-semibold text-primary/30">{String(index + 1).padStart(2, "0")}</p>
+              <h3 class="mt-4 text-xl font-semibold tracking-tight">{title}</h3>
+              <p class="mt-2 text-muted-foreground">{description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
+          <Eyebrow label="A closer look" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">One assistant, working across your business.</h2>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">A clean dashboard for your team, a thoughtful widget for your customers, and a smooth path from question to outcome.</p>
+        </div>
+        <div class="mt-12 grid gap-6 lg:grid-cols-2">
+          <BrowserFrame title="snoodlr.app - Dashboard" class="w-full">
+            <div class="p-5">
+              <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+                {[
+                  ["Conversations", "1,284"],
+                  ["Leads captured", "342"],
+                  ["Orders assisted", "97"],
+                  ["Avg. response", "1.2s"]
+                ].map(([label, value]) => (
+                  <div class="rounded-xl border border-border/60 bg-surface/70 p-4">
+                    <p class="text-xs text-muted-foreground">{label}</p>
+                    <p class="mt-1 text-2xl font-semibold tracking-tight">{value}</p>
+                  </div>
+                ))}
+              </div>
+              <div class="mt-4 h-32 rounded-xl border border-border/60 bg-gradient-to-tr from-primary/10 via-transparent to-primary/5 p-4">
+                <div class="flex h-full items-end gap-1.5">
+                  {[20, 35, 28, 50, 42, 65, 58, 72, 60, 80, 75, 92].map((height) => (
+                    <div class="flex-1 rounded-t bg-primary/70" style={`height:${height}%`}></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </BrowserFrame>
+
+          <BrowserFrame title="yourshop.com" class="w-full">
+            <div class="relative h-[360px] bg-grid">
+              <div class="absolute bottom-4 right-4 w-[300px] overflow-hidden rounded-2xl border border-border-strong/60 bg-surface shadow-frame">
+                <div class="flex items-center gap-2 bg-primary px-4 py-3 text-primary-foreground">
+                  <div class="h-7 w-7 rounded-full bg-primary-foreground/15"></div>
+                  <div>
+                    <p class="text-sm font-semibold">Snoodlr Assistant</p>
+                    <p class="text-[10px] opacity-80">Typically replies instantly</p>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 text-xs">
+                  <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">Hi! Looking for something specific?</div>
+                  <div class="ml-auto max-w-[85%] rounded-xl bg-primary px-3 py-2 text-primary-foreground">Do you ship to Texas?</div>
+                  <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">Yes - free 2-day shipping on orders over $50.</div>
+                </div>
+              </div>
+            </div>
+          </BrowserFrame>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-20 md:py-28" id="use-cases">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
+          <Eyebrow label="Use cases" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Built for businesses that talk to customers.</h2>
+        </div>
+        <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {useCases.map(([title, description]) => (
+            <div class="rounded-2xl border border-border/60 bg-card p-7 transition-colors hover:border-primary/40">
+              <h3 class="text-lg font-semibold tracking-tight">{title}</h3>
+              <p class="mt-2 text-muted-foreground">{description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28" id="wordpress">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="grid items-center gap-12 md:grid-cols-2">
+          <div>
+            <Eyebrow label="WordPress & WooCommerce" />
+            <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Power up your WordPress site or WooCommerce store with Snoodlr.</h2>
+            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Connect Snoodlr to your website so your assistant can help customers with richer answers, product discovery, order support, and business-specific conversations.</p>
+            <div class="mt-8">
+              <a href="#start" class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">Get the plugin</a>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-border-strong/60 bg-background p-8 shadow-frame">
+            <div class="space-y-4">
+              {[
+                "Product discovery from your catalog",
+                "Order lookup and post-purchase support",
+                "Business-specific Q&A from your pages",
+                "Lead capture into your existing flow"
+              ].map((item) => (
+                <div class="flex items-start gap-3">
+                  <span class="mt-1 h-5 w-5 flex-none rounded-md bg-primary/15 ring-1 ring-primary/40"></span>
+                  <p class="text-foreground">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
+          <Eyebrow label="Built for business" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Confidence baked into every conversation.</h2>
+        </div>
+        <div class="mt-12 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          {businessPoints.map((point) => (
+            <div class="flex items-center gap-3 rounded-xl border border-border/60 bg-card px-5 py-4">
+              <span class="h-2 w-2 rounded-full bg-primary"></span>
+              <p class="font-medium">{point}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CtaBand />
+  </main>
+</BaseLayout>

@@ -1,0 +1,167 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import CheckIcon from "../components/CheckIcon.astro";
+import CtaBand from "../components/CtaBand.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import { APP_LOGIN_URL } from "../lib/links";
+
+const plans = [
+  {
+    name: "Free",
+    price: "$0",
+    cadence: "forever",
+    description: "Try Snoodlr on your site with no commitment.",
+    cta: "Start free",
+    href: APP_LOGIN_URL,
+    featured: false,
+    features: ["1 AI assistant", "Up to 100 conversations / month", "Website widget", "Basic lead capture", "Email notifications"]
+  },
+  {
+    name: "Essential",
+    price: "$15",
+    cadence: "/ month",
+    description: "For small businesses ready to grow.",
+    cta: "Start Essential",
+    href: APP_LOGIN_URL,
+    featured: true,
+    features: ["1 AI assistant", "Up to 2,000 conversations / month", "Website widget + WordPress plugin", "Advanced lead capture & routing", "Custom business tone", "Priority email support"]
+  },
+  {
+    name: "Business",
+    price: "$50",
+    cadence: "/ month",
+    description: "For teams that need scale and control.",
+    cta: "Start Business",
+    href: APP_LOGIN_URL,
+    featured: false,
+    features: ["3 AI assistants", "Unlimited conversations", "Website widget + WordPress + API", "Advanced lead capture & CRM sync", "Custom business tone & flows", "Team collaboration & handoffs", "Priority support", "Analytics dashboard"]
+  },
+  {
+    name: "Enterprise",
+    price: "Custom",
+    cadence: "",
+    description: "Dedicated setup, SLAs, and custom work.",
+    cta: "Call sales",
+    href: "/contact",
+    featured: false,
+    features: ["Unlimited AI assistants", "Unlimited conversations", "All integrations + custom builds", "Dedicated account manager", "SSO & advanced security", "Custom AI training on your data", "SLA guarantee", "White-glove onboarding"]
+  }
+];
+
+const rows = [
+  ["Conversations", "100/mo", "2,000/mo", "Unlimited", "Unlimited"],
+  ["AI assistants", "1", "1", "3", "Unlimited"],
+  ["Website widget", true, true, true, true],
+  ["WordPress plugin", false, true, true, true],
+  ["API access", false, false, true, true],
+  ["Custom tone & flows", false, true, true, true],
+  ["CRM / handoffs", false, false, true, true],
+  ["Analytics dashboard", false, false, true, true],
+  ["Priority support", false, true, true, true],
+  ["Dedicated account manager", false, false, false, true],
+  ["SSO & advanced security", false, false, false, true],
+  ["Custom AI training", false, false, false, true],
+  ["SLA guarantee", false, false, false, true]
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Snoodlr",
+    applicationCategory: "BusinessApplication",
+    url: "https://snoodlr.com/pricing",
+    offers: plans.map((plan) => ({
+      "@type": "Offer",
+      name: plan.name,
+      price: plan.price.startsWith("$") ? plan.price.replace("$", "") : "0",
+      priceCurrency: "USD"
+    }))
+  }
+];
+---
+
+<BaseLayout
+  title="Pricing - Snoodlr AI business assistant"
+  description="Simple, transparent pricing for Snoodlr. Start free, then scale with Essential or Business plans. Enterprise? Let's talk."
+  ogTitle="Pricing - Snoodlr"
+  ogDescription="Simple pricing for your AI business assistant. Free, Essential, Business, and Enterprise plans."
+  path="/pricing"
+  jsonLd={jsonLd}
+>
+  <main class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 bg-hero-glow"></div>
+
+    <section class="relative py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="mx-auto max-w-3xl text-center">
+          <Eyebrow label="Pricing" />
+          <h1 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Simple pricing. Serious outcomes.</h1>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Start free and upgrade when you're ready. No hidden fees, no annual lock-in.</p>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {plans.map((plan) => (
+            <div class={`relative flex flex-col rounded-3xl border p-7 ${plan.featured ? "border-primary/60 bg-card shadow-frame" : "border-border/60 bg-card/60"}`}>
+              {plan.featured && <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-0.5 text-xs font-semibold text-primary-foreground">Most popular</span>}
+              <div class="flex-1">
+                <h2 class="text-lg font-semibold tracking-tight">{plan.name}</h2>
+                <div class="mt-2 flex items-baseline gap-1">
+                  <span class="text-4xl font-semibold tracking-tight">{plan.price}</span>
+                  {plan.cadence && <span class="text-sm text-muted-foreground">{plan.cadence}</span>}
+                </div>
+                <p class="mt-2 text-sm text-muted-foreground">{plan.description}</p>
+                <ul class="mt-6 space-y-2.5">
+                  {plan.features.map((feature) => (
+                    <li class="flex items-start gap-2 text-sm text-foreground">
+                      <CheckIcon />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <a href={plan.href} class={`mt-7 inline-flex h-11 w-full items-center justify-center rounded-full text-sm font-semibold transition-transform hover:scale-[1.02] ${plan.featured ? "bg-primary text-primary-foreground shadow-soft" : "border border-border-strong bg-surface/60 text-foreground hover:bg-surface"}`}>{plan.cta}</a>
+            </div>
+          ))}
+        </div>
+
+        <p class="mt-8 text-center text-sm text-muted-foreground">All paid plans include a 14-day free trial. No credit card required to start. Cancel anytime.</p>
+      </div>
+    </section>
+
+    <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
+          <Eyebrow label="Compare" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">What's included</h2>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Every plan gives you the core Snoodlr experience. Upgrade for more volume, assistants, and control.</p>
+        </div>
+
+        <div class="mt-12 overflow-x-auto">
+          <table class="w-full min-w-[640px] text-left text-sm">
+            <thead>
+              <tr class="border-b border-border-strong">
+                <th class="py-3 pr-4 font-medium text-muted-foreground">Feature</th>
+                {plans.map((plan) => <th class="px-4 py-3 font-semibold text-foreground">{plan.name}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map(([label, free, essential, business, enterprise]) => (
+                <tr class="border-b border-border/40">
+                  <td class="py-3 pr-4 font-medium text-foreground">{label}</td>
+                  {[free, essential, business, enterprise].map((value) => (
+                    <td class="px-4 py-3 text-muted-foreground">
+                      {value === true ? <CheckIcon /> : value === false ? <span class="text-muted-foreground/40">&mdash;</span> : <span>{value}</span>}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <CtaBand />
+  </main>
+</BaseLayout>

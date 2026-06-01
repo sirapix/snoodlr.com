@@ -1,0 +1,89 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import { APP_LOGIN_URL } from "../lib/links";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact Snoodlr",
+  url: "https://snoodlr.com/contact",
+  about: {
+    "@type": "SoftwareApplication",
+    name: "Snoodlr"
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "hello@snoodlr.com",
+    contactType: "customer support"
+  }
+};
+---
+
+<BaseLayout
+  title="Contact Snoodlr - Support, partnerships, and business inquiries"
+  description="Talk to the Snoodlr team about support, partnerships, and business inquiries - or start free in minutes."
+  ogTitle="Contact Snoodlr"
+  ogDescription="Let's talk about Snoodlr - support, partnerships, and business inquiries."
+  path="/contact"
+  jsonLd={jsonLd}
+>
+  <main class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 bg-hero-glow"></div>
+    <div class="relative mx-auto max-w-6xl px-6 pb-24 pt-20 md:pt-28">
+      <div class="max-w-2xl">
+        <Eyebrow label="Contact" />
+        <h1 class="mt-6 text-balance text-5xl font-semibold tracking-tight md:text-6xl">Let's talk about Snoodlr.</h1>
+        <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Whether you need support, want to explore a partnership, or have a business question - we're here. Reach out and we'll get back to you quickly.</p>
+      </div>
+
+      <div class="mt-14 grid gap-8 md:grid-cols-5">
+        <form class="rounded-3xl border border-border/60 bg-card p-7 md:col-span-3 md:p-9" action="mailto:hello@snoodlr.com" enctype="text/plain" method="post">
+          <div class="grid gap-5">
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-foreground">Your name</span>
+              <input required type="text" class="h-11 w-full rounded-lg border border-border bg-input/40 px-4 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="Jane Doe" name="name" />
+            </label>
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-foreground">Email</span>
+              <input required type="email" class="h-11 w-full rounded-lg border border-border bg-input/40 px-4 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="you@business.com" name="email" />
+            </label>
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-foreground">Company (optional)</span>
+              <input type="text" class="h-11 w-full rounded-lg border border-border bg-input/40 px-4 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="Acme Co." name="company" />
+            </label>
+            <label class="block">
+              <span class="mb-2 block text-sm font-medium text-foreground">How can we help?</span>
+              <textarea required name="message" rows="5" class="w-full rounded-lg border border-border bg-input/40 px-4 py-3 text-foreground outline-none ring-primary/40 focus:ring-2" placeholder="Tell us a bit about your business and what you're looking for."></textarea>
+            </label>
+          </div>
+          <div class="mt-7 flex flex-wrap items-center gap-3">
+            <button type="submit" class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">Send message</button>
+            <a href="mailto:hello@snoodlr.com" class="text-sm text-muted-foreground hover:text-foreground">Or email hello@snoodlr.com</a>
+          </div>
+        </form>
+
+        <aside class="space-y-4 md:col-span-2">
+          <div class="rounded-2xl border border-border/60 bg-card p-6">
+            <p class="text-lg font-semibold tracking-tight">Start free</p>
+            <p class="mt-1.5 text-sm text-muted-foreground">Skip the form - set up your AI business assistant in minutes.</p>
+            <a href={APP_LOGIN_URL} class="mt-4 inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground">Start free</a>
+          </div>
+          <div class="rounded-2xl border border-border/60 bg-card p-6">
+            <p class="text-lg font-semibold tracking-tight">Sign in</p>
+            <p class="mt-1.5 text-sm text-muted-foreground">Already using Snoodlr? Jump back into your workspace.</p>
+            <a href={APP_LOGIN_URL} class="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-5 text-sm font-medium">Sign in</a>
+          </div>
+          <div class="rounded-2xl border border-border/60 bg-surface/40 p-6">
+            <p class="text-sm font-medium text-foreground">Inquiries</p>
+            <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
+              <li>Support - help with your account</li>
+              <li>Partnerships - integrations and resellers</li>
+              <li>Business - agencies and custom work</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</BaseLayout>

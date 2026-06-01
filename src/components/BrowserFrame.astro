@@ -1,0 +1,15 @@
+---
+const { title, class: className = "" } = Astro.props;
+---
+
+<div class={`overflow-hidden rounded-2xl border border-border-strong/60 bg-surface shadow-frame ${className}`}>
+  <div class="flex items-center gap-2 border-b border-border/60 bg-background/60 px-4 py-3">
+    <span class="h-2.5 w-2.5 rounded-full bg-muted-foreground/30"></span>
+    <span class="h-2.5 w-2.5 rounded-full bg-muted-foreground/30"></span>
+    <span class="h-2.5 w-2.5 rounded-full bg-muted-foreground/30"></span>
+    <span class="ml-3 text-xs text-muted-foreground">{title}</span>
+  </div>
+  <div class="bg-background/40">
+    <slot />
+  </div>
+</div>
