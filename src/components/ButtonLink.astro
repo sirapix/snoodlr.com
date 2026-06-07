@@ -1,0 +1,35 @@
+---
+import type { SiteLang } from "../lib/links";
+import { buttonClasses, buttonLabelClasses, type ButtonSize, type ButtonVariant } from "../lib/buttonStyles";
+
+const {
+  href,
+  variant = "primary",
+  size = "lg",
+  lang = "en",
+  block = false,
+  class: className = "",
+  ...attrs
+} = Astro.props as {
+  href: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  lang?: SiteLang;
+  block?: boolean;
+  class?: string;
+  [key: string]: unknown;
+};
+
+const buttonClass = buttonClasses({ variant, size, block, className });
+const labelClass = buttonLabelClasses(lang);
+---
+
+<a
+  href={href}
+  class={buttonClass}
+  {...attrs}
+>
+  <span class={labelClass}>
+    <slot />
+  </span>
+</a>

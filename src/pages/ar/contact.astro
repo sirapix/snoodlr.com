@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../components/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
 import { appLoginUrl } from "../../lib/links";
 
@@ -77,7 +79,7 @@ const jsonLd = {
           </div>
           <p data-contact-status class="mt-5 hidden rounded-xl border px-4 py-3 text-sm" role="status" aria-live="polite"></p>
           <div class="mt-7 flex flex-wrap items-center gap-3">
-            <button type="submit" data-contact-submit class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02] disabled:cursor-wait disabled:opacity-70">إرسال الرسالة</button>
+            <Button type="submit" lang="ar" data-contact-submit>إرسال الرسالة</Button>
             <p class="text-sm text-muted-foreground">سنرد على البريد الإلكتروني الذي تدخله.</p>
           </div>
         </form>
@@ -86,12 +88,12 @@ const jsonLd = {
           <div class="rounded-2xl border border-border/60 bg-card p-6">
             <p class="text-lg font-semibold tracking-tight">ابدأ مجانًا</p>
             <p class="mt-1.5 text-sm text-muted-foreground">تجاوز النموذج وأعد مساعد أعمالك بالذكاء الاصطناعي خلال دقائق.</p>
-            <a href={appLoginHref} class="mt-4 inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground">ابدأ مجانًا</a>
+            <ButtonLink href={appLoginHref} size="md" lang="ar" class="mt-4">ابدأ مجانًا</ButtonLink>
           </div>
           <div class="rounded-2xl border border-border/60 bg-card p-6">
             <p class="text-lg font-semibold tracking-tight">تسجيل الدخول</p>
             <p class="mt-1.5 text-sm text-muted-foreground">تستخدم Snoodlr بالفعل؟ عد إلى مساحة عملك.</p>
-            <a href={appLoginHref} class="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-5 text-sm font-medium">تسجيل الدخول</a>
+            <ButtonLink href={appLoginHref} size="md" variant="secondary" lang="ar" class="mt-4">تسجيل الدخول</ButtonLink>
           </div>
           <div class="rounded-2xl border border-border/60 bg-surface/40 p-6">
             <p class="text-sm font-medium text-foreground">الاستفسارات</p>

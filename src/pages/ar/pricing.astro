@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../components/BaseLayout.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
 import CheckIcon from "../../components/CheckIcon.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
@@ -122,7 +123,7 @@ const jsonLd = {
                   ))}
                 </ul>
               </div>
-              <a href={plan.href} class={`mt-7 inline-flex h-11 w-full items-center justify-center rounded-full text-sm font-semibold transition-transform hover:scale-[1.02] ${plan.featured ? "bg-primary text-primary-foreground shadow-soft" : "border border-border-strong bg-surface/60 text-foreground hover:bg-surface"}`}>{plan.cta}</a>
+              <ButtonLink href={plan.href} size="card" variant={plan.featured ? "primary" : "secondary"} lang="ar" block class="mt-7">{plan.cta}</ButtonLink>
             </div>
           ))}
         </div>

@@ -1,4 +1,5 @@
 ---
+import ButtonLink from "./ButtonLink.astro";
 import ThemeToggle from "./ThemeToggle";
 import { appLoginUrl, languageSwitchPath, localizedPath, type SiteLang } from "../lib/links";
 
@@ -21,7 +22,8 @@ const labels = isArabic
       pricing: "الأسعار",
       contact: "تواصل معنا",
       start: "ابدأ مجانًا",
-      switch: "English"
+      switch: "English",
+      switchShort: "EN"
     }
   : {
       home: "Snoodlr home",
@@ -30,10 +32,12 @@ const labels = isArabic
       pricing: "Pricing",
       contact: "Contact",
       start: "Start free",
-      switch: "العربية"
+      switch: "العربية",
+      switchShort: "ع"
     };
 const navLink = "text-sm text-muted-foreground transition-colors hover:text-foreground";
 const activeLink = "text-sm text-foreground";
+const shortSwitchClass = isArabic ? "translate-y-[2px]" : "-translate-y-[2px]";
 ---
 
 <header class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
@@ -50,9 +54,12 @@ const activeLink = "text-sm text-foreground";
     </nav>
 
     <div class="flex items-center gap-3">
-      <a href={languageSwitchPath(siteLang, currentPath)} class="hidden rounded-full border border-border/60 bg-surface/60 px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent sm:inline-flex">{labels.switch}</a>
+      <a href={languageSwitchPath(siteLang, currentPath)} aria-label={labels.switch} class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-surface/60 text-sm font-semibold leading-none text-foreground transition-colors hover:bg-accent sm:w-auto sm:px-3 sm:font-medium">
+        <span class={`block sm:hidden ${shortSwitchClass}`}>{labels.switchShort}</span>
+        <span class="hidden sm:inline">{labels.switch}</span>
+      </a>
       <ThemeToggle client:load />
-      <a href={loginUrl} class="inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">{labels.start}</a>
+      <ButtonLink href={loginUrl} size="md" lang={siteLang}>{labels.start}</ButtonLink>
     </div>
   </div>
 </header>

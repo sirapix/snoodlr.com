@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../components/BaseLayout.astro";
 import BrowserFrame from "../components/BrowserFrame.astro";
+import ButtonLink from "../components/ButtonLink.astro";
 import CheckIcon from "../components/CheckIcon.astro";
 import ConnectedChannels from "../components/ConnectedChannels.astro";
 import CtaBand from "../components/CtaBand.astro";
@@ -70,8 +71,8 @@ const jsonLd = {
           Snoodlr gives your business an AI assistant that answers customers, captures qualified leads, and helps move conversations toward real outcomes.
         </p>
         <div class="mt-9 flex flex-wrap justify-center gap-3">
-          <a href={APP_LOGIN_URL} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">Start free</a>
-          <a href="#how-it-works" class="inline-flex h-12 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-7 text-base font-medium text-foreground transition-colors hover:bg-surface">See how it works</a>
+          <ButtonLink href={APP_LOGIN_URL}>Start free</ButtonLink>
+          <ButtonLink href="#how-it-works" variant="secondary">See how it works</ButtonLink>
         </div>
 
         <div class="relative mt-20">
@@ -263,7 +264,7 @@ const jsonLd = {
             <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Power up your WordPress site or WooCommerce store with Snoodlr.</h2>
             <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Connect Snoodlr to your website so your assistant can help customers with richer answers, product discovery, order support, and business-specific conversations.</p>
             <div class="mt-8">
-              <a href="#start" class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">Get the plugin</a>
+              <ButtonLink href="#start">Get the plugin</ButtonLink>
             </div>
           </div>
           <div class="rounded-3xl border border-border-strong/60 bg-background p-8 shadow-frame">

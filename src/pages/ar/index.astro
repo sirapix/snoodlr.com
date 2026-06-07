@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../components/BaseLayout.astro";
 import BrowserFrame from "../../components/BrowserFrame.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
 import ConnectedChannels from "../../components/ConnectedChannels.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
@@ -73,8 +74,8 @@ const jsonLd = {
           يمنح Snoodlr نشاطك مساعدًا ذكيًا يجيب عن العملاء، يجمع العملاء المحتملين المؤهلين، ويساعد المحادثات على التحول إلى نتائج حقيقية.
         </p>
         <div class="mt-9 flex flex-wrap justify-center gap-3">
-          <a href={appLoginHref} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">ابدأ مجانًا</a>
-          <a href="#how-it-works" class="inline-flex h-12 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-7 text-base font-medium text-foreground transition-colors hover:bg-surface">شاهد طريقة العمل</a>
+          <ButtonLink href={appLoginHref} lang="ar">ابدأ مجانًا</ButtonLink>
+          <ButtonLink href="#how-it-works" variant="secondary" lang="ar">شاهد طريقة العمل</ButtonLink>
         </div>
 
         <div class="relative mt-20">
@@ -285,7 +286,7 @@ const jsonLd = {
             <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">قوّ موقع ووردبريس أو متجر WooCommerce باستخدام Snoodlr.</h2>
             <p class="mt-5 text-lg leading-relaxed text-muted-foreground">اربط Snoodlr بموقعك ليساعد العملاء بإجابات أغنى، واكتشاف المنتجات، ودعم الطلبات، ومحادثات مخصصة لنشاطك.</p>
             <div class="mt-8">
-              <a href={appLoginHref} class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02]">احصل على الإضافة</a>
+              <ButtonLink href={appLoginHref} lang="ar">احصل على الإضافة</ButtonLink>
             </div>
           </div>
           <div class="rounded-3xl border border-border-strong/60 bg-background p-8 shadow-frame">

@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../components/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import ButtonLink from "../components/ButtonLink.astro";
 import Eyebrow from "../components/Eyebrow.astro";
 import { APP_LOGIN_URL } from "../lib/links";
 
@@ -73,7 +75,7 @@ const jsonLd = {
           </div>
           <p data-contact-status class="mt-5 hidden rounded-xl border px-4 py-3 text-sm" role="status" aria-live="polite"></p>
           <div class="mt-7 flex flex-wrap items-center gap-3">
-            <button type="submit" data-contact-submit class="inline-flex h-12 items-center justify-center rounded-full bg-primary px-7 text-base font-semibold text-primary-foreground shadow-soft transition-transform hover:scale-[1.02] disabled:cursor-wait disabled:opacity-70">Send message</button>
+            <Button type="submit" data-contact-submit>Send message</Button>
             <p class="text-sm text-muted-foreground">We'll reply to the email you enter.</p>
           </div>
         </form>
@@ -82,12 +84,12 @@ const jsonLd = {
           <div class="rounded-2xl border border-border/60 bg-card p-6">
             <p class="text-lg font-semibold tracking-tight">Start free</p>
             <p class="mt-1.5 text-sm text-muted-foreground">Skip the form - set up your AI business assistant in minutes.</p>
-            <a href={APP_LOGIN_URL} class="mt-4 inline-flex h-10 items-center justify-center rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground">Start free</a>
+            <ButtonLink href={APP_LOGIN_URL} size="md" class="mt-4">Start free</ButtonLink>
           </div>
           <div class="rounded-2xl border border-border/60 bg-card p-6">
             <p class="text-lg font-semibold tracking-tight">Sign in</p>
             <p class="mt-1.5 text-sm text-muted-foreground">Already using Snoodlr? Jump back into your workspace.</p>
-            <a href={APP_LOGIN_URL} class="mt-4 inline-flex h-10 items-center justify-center rounded-full border border-border-strong bg-surface/60 px-5 text-sm font-medium">Sign in</a>
+            <ButtonLink href={APP_LOGIN_URL} size="md" variant="secondary" class="mt-4">Sign in</ButtonLink>
           </div>
           <div class="rounded-2xl border border-border/60 bg-surface/40 p-6">
             <p class="text-sm font-medium text-foreground">Inquiries</p>
