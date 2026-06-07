@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../components/BaseLayout.astro";
 import BrowserFrame from "../../components/BrowserFrame.astro";
+import ConnectedChannels from "../../components/ConnectedChannels.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
 import { appLoginUrl } from "../../lib/links";
@@ -85,6 +86,17 @@ const jsonLd = {
                   <div class="h-7 w-7 rounded-md bg-primary/20 ring-1 ring-primary/40"></div>
                   <div class="h-3 w-20 rounded bg-muted"></div>
                 </div>
+                <ConnectedChannels
+                  class="mb-4"
+                  labels={{
+                    heading: "القنوات المتصلة",
+                    widget: "الموقع",
+                    whatsapp: "واتساب",
+                    instagram: "إنستغرام",
+                    facebook: "فيسبوك",
+                    more: "المزيد"
+                  }}
+                />
                 {[
                   ["عملاء جدد", "12", true],
                   ["محادثات نشطة", "4", false],
@@ -105,6 +117,18 @@ const jsonLd = {
                   </div>
                   <span class="rounded-full bg-primary/15 px-2.5 py-1 text-xs font-medium text-primary">عميل مؤهل</span>
                 </div>
+                <ConnectedChannels
+                  compact
+                  class="mb-4 md:hidden"
+                  labels={{
+                    heading: "القنوات",
+                    widget: "الموقع",
+                    whatsapp: "واتساب",
+                    instagram: "إنستغرام",
+                    facebook: "فيسبوك",
+                    more: "المزيد"
+                  }}
+                />
                 <div class="space-y-3">
                   <div class="flex justify-start">
                     <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">هل توفرون توصيلًا في نفس اليوم؟</div>

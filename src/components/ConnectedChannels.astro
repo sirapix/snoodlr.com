@@ -1,0 +1,87 @@
+---
+type ChannelLabels = {
+  heading: string;
+  widget: string;
+  whatsapp: string;
+  instagram: string;
+  facebook: string;
+  more: string;
+};
+
+const defaultLabels: ChannelLabels = {
+  heading: "Connected channels",
+  widget: "Website",
+  whatsapp: "WhatsApp",
+  instagram: "Instagram",
+  facebook: "Facebook",
+  more: "More"
+};
+
+const {
+  labels = {},
+  compact = false,
+  class: className = ""
+} = Astro.props as {
+  labels?: Partial<ChannelLabels>;
+  compact?: boolean;
+  class?: string;
+};
+
+const copy = { ...defaultLabels, ...labels };
+const channels = [
+  { label: copy.widget, icon: "widget", tone: "bg-primary/10 text-primary ring-primary/20" },
+  { label: copy.whatsapp, icon: "whatsapp", tone: "bg-[#25D366]/10 text-[#15803d] ring-[#25D366]/25 dark:text-[#86efac]" },
+  { label: copy.instagram, icon: "instagram", tone: "bg-[#E1306C]/10 text-[#B83280] ring-[#E1306C]/20 dark:text-[#f5a3c7]" },
+  { label: copy.facebook, icon: "facebook", tone: "bg-[#1877F2]/10 text-[#1877F2] ring-[#1877F2]/20 dark:text-[#93c5fd]" },
+  { label: copy.more, icon: "more", tone: "bg-muted/60 text-muted-foreground ring-border/70" }
+];
+
+const shellClass = compact
+  ? "flex items-center justify-between gap-3 rounded-xl border border-border/50 bg-surface/65 px-3 py-2"
+  : "border-y border-border/50 py-3";
+const listClass = compact ? "flex shrink-0 items-center gap-1.5" : "mt-2 grid grid-cols-2 gap-x-3 gap-y-2";
+const itemClass = compact
+  ? "grid h-7 w-7 place-items-center rounded-lg ring-1"
+  : "inline-flex min-w-0 items-center gap-1.5 text-[11px] font-medium text-muted-foreground";
+const iconClass = "grid h-5 w-5 shrink-0 place-items-center rounded-md ring-1";
+---
+
+<div class={`${shellClass} ${className}`}>
+  <p class="shrink-0 text-[11px] font-medium text-muted-foreground">{copy.heading}</p>
+  <div class={listClass} role="list">
+    {channels.map((channel) => (
+      <span class={compact ? `${itemClass} ${channel.tone}` : itemClass} role="listitem" title={channel.label}>
+        <span class={compact ? "contents" : `${iconClass} ${channel.tone}`} aria-hidden="true">
+          {channel.icon === "widget" && (
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+              <path d="M5.5 5.5h13v9h-7L8 18v-3.5H5.5v-9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+              <path d="M8.5 8.8h7M8.5 11.5h4.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          )}
+          {channel.icon === "whatsapp" && (
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+              <path d="M7.2 18.5 4.8 19l.6-2.3a7.2 7.2 0 1 1 1.8 1.8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+              <path d="M9.1 8.4c.4-.3.8-.2 1 .2l.5 1c.1.3.1.6-.1.8l-.4.4c.5 1 1.2 1.7 2.2 2.2l.4-.4c.2-.2.5-.3.8-.1l1 .5c.4.2.5.7.2 1-.4.5-.9.7-1.5.6-2.3-.4-4.1-2.2-4.5-4.5-.1-.6.1-1.2.4-1.7Z" fill="currentColor" />
+            </svg>
+          )}
+          {channel.icon === "instagram" && (
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+              <rect x="6.2" y="6.2" width="11.6" height="11.6" rx="3.2" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="12" cy="12" r="2.7" stroke="currentColor" stroke-width="1.8" />
+              <circle cx="15.5" cy="8.7" r="0.8" fill="currentColor" />
+            </svg>
+          )}
+          {channel.icon === "facebook" && (
+            <span class="text-sm font-semibold leading-none">f</span>
+          )}
+          {channel.icon === "more" && (
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none">
+              <path d="M12 7v10M7 12h10" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" />
+            </svg>
+          )}
+        </span>
+        {!compact && <span class="truncate">{channel.label}</span>}
+      </span>
+    ))}
+  </div>
+</div>
