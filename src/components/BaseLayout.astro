@@ -79,5 +79,12 @@ const structuredData = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
       <slot />
       <Footer currentPath={cleanPath} lang={siteLang} />
     </div>
+    <script
+      is:inline
+      async
+      src="https://app.snoodlr.com/widget/loader.js"
+      data-public-key="3401a55125e92c5697602642cab1809e42d6a7ce68d3ec0e45decaa5a5ed359d"
+      data-api-base="https://api.snoodlr.com"
+    ></script>
   </body>
 </html>
