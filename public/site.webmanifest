@@ -1,0 +1,26 @@
+{
+  "name": "Snoodlr",
+  "short_name": "Snoodlr",
+  "description": "AI business assistant and unified inbox for leads, orders, support, messages, and comments.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#06100d",
+  "theme_color": "#06100d",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

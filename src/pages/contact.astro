@@ -8,11 +8,16 @@ import { APP_LOGIN_URL } from "../lib/links";
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
+  "@id": "https://snoodlr.com/contact#contact-page",
   name: "Contact Snoodlr",
   url: "https://snoodlr.com/contact",
   about: {
     "@type": "SoftwareApplication",
+    "@id": "https://snoodlr.com/#software",
     name: "Snoodlr"
+  },
+  mainEntity: {
+    "@id": "https://snoodlr.com/#organization"
   },
   contactPoint: {
     "@type": "ContactPoint",
@@ -28,6 +33,13 @@ const jsonLd = {
   ogTitle="Contact Snoodlr"
   ogDescription="Let's talk about Snoodlr - support, partnerships, and business inquiries."
   path="/contact"
+  keywords={[
+    "contact Snoodlr",
+    "Snoodlr support",
+    "Snoodlr partnerships",
+    "AI business assistant support",
+    "AI chatbot business inquiry"
+  ]}
   jsonLd={jsonLd}
 >
   <main class="relative overflow-hidden">

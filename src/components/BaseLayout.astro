@@ -3,6 +3,14 @@ import "../styles/global.css";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import { canonicalPath, localizedPath, SITE_URL, type SiteLang } from "../lib/links";
+import {
+  DEFAULT_KEYWORDS,
+  getDefaultStructuredData,
+  OG_IMAGE_HEIGHT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_WIDTH,
+  SITE_NAME
+} from "../lib/seo";
 
 const {
   title,
@@ -11,7 +19,9 @@ const {
   lang = "en",
   ogTitle = title,
   ogDescription = description,
-  jsonLd = []
+  jsonLd = [],
+  keywords = [],
+  noindex = false
 } = Astro.props;
 
 const siteLang = lang as SiteLang;
@@ -20,8 +30,19 @@ const englishEquivalent = cleanPath === "/ar/" ? "/" : cleanPath.startsWith("/ar
 const alternateEn = localizedPath("en", englishEquivalent as "/" | "/pricing" | "/contact");
 const alternateAr = localizedPath("ar", englishEquivalent as "/" | "/pricing" | "/contact");
 const canonical = new URL(cleanPath, SITE_URL).toString();
-const ogImage = new URL("/og/snoodlr-og.png", SITE_URL).toString();
-const structuredData = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
+const ogImage = new URL(OG_IMAGE_PATH, SITE_URL).toString();
+const pageKeywords = Array.from(new Set([...DEFAULT_KEYWORDS, ...(Array.isArray(keywords) ? keywords : [keywords])])).join(", ");
+const robotsContent = noindex ? "noindex,nofollow" : "index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1";
+const ogLocale = siteLang === "ar" ? "ar_AR" : "en_US";
+const alternateOgLocale = siteLang === "ar" ? "en_US" : "ar_AR";
+const defaultStructuredData = getDefaultStructuredData({
+  canonical,
+  title,
+  description,
+  lang: siteLang,
+  path: cleanPath
+});
+const structuredData = [...defaultStructuredData, ...(Array.isArray(jsonLd) ? jsonLd : [jsonLd])].filter(Boolean);
 ---
 
 <!doctype html>
@@ -30,30 +51,49 @@ const structuredData = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#06100d" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="application-name" content={SITE_NAME} />
+    <meta name="author" content={SITE_NAME} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="robots" content={robotsContent} />
+    <meta name="googlebot" content={robotsContent} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={pageKeywords} />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="en" href={new URL(alternateEn, SITE_URL).toString()} />
     <link rel="alternate" hreflang="ar" href={new URL(alternateAr, SITE_URL).toString()} />
     <link rel="alternate" hreflang="x-default" href={new URL(alternateEn, SITE_URL).toString()} />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/icons/favicon-32x32.png" />
+    <link rel="alternate" type="text/plain" title="Snoodlr llms.txt" href="/llms.txt" />
+    <link rel="author" href="/humans.txt" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="512x512" />
+    <link rel="icon" href="/icons/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" as="image" href="/assets/snoodlr-logo.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
 
     <meta property="og:site_name" content="Snoodlr" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={alternateOgLocale} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:url" content={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+    <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
     <meta property="og:image:alt" content="Snoodlr AI business assistant preview" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Snoodlr AI business assistant preview" />
 
     {structuredData.map((item) => (
       <script type="application/ld+json" set:html={JSON.stringify(item)} />

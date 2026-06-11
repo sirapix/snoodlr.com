@@ -10,12 +10,17 @@ const appLoginHref = appLoginUrl("ar");
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
+  "@id": "https://snoodlr.com/ar/contact#contact-page",
   name: "تواصل مع Snoodlr",
   url: "https://snoodlr.com/ar/contact",
   inLanguage: "ar",
   about: {
     "@type": "SoftwareApplication",
+    "@id": "https://snoodlr.com/#software",
     name: "Snoodlr"
+  },
+  mainEntity: {
+    "@id": "https://snoodlr.com/#organization"
   },
   contactPoint: {
     "@type": "ContactPoint",
@@ -32,6 +37,13 @@ const jsonLd = {
   ogTitle="تواصل مع Snoodlr"
   ogDescription="لنتحدث عن Snoodlr: الدعم، الشراكات، واستفسارات الأعمال."
   path="/ar/contact"
+  keywords={[
+    "تواصل مع Snoodlr",
+    "دعم Snoodlr",
+    "شراكات Snoodlr",
+    "دعم مساعد أعمال بالذكاء الاصطناعي",
+    "استفسار شات بوت للأعمال"
+  ]}
   jsonLd={jsonLd}
 >
   <main class="relative overflow-hidden">

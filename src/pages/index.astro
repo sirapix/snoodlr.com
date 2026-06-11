@@ -21,9 +21,9 @@ const assistantFeatures = [
   ["Answer from your real business content", "Use approved website pages, uploaded documents, policies, FAQs, and store data so replies reflect how your business actually works."],
   ["Capture leads while customers are interested", "Ask for name, phone, email, and request details in the flow of the conversation, then save them for follow-up."],
   ["Support product discovery and order requests", "Help shoppers compare products, ask about availability, and send order requests for your team to confirm."],
-  ["Manage conversations in one place", "Review chats, lead details, customer questions, and follow-up needs from the Snoodlr portal."],
-  ["Work across supported customer channels", "Start with your website. Connect WhatsApp, Facebook/Messenger, WordPress/WooCommerce, and more as supported integrations are enabled."],
-  ["Stay in control with human handoff", "Keep answers tied to approved sources and let your team step in when a conversation needs a person."]
+  ["Manage a unified inbox in one place", "Review website chats, supported social messages, social media comments, lead details, customer questions, and follow-up needs from the Snoodlr portal."],
+  ["Work across supported customer channels", "Start with your website. Connect WhatsApp, Facebook/Messenger, WordPress/WooCommerce, supported social accounts, and more as integrations are enabled."],
+  ["Review answers and fill knowledge gaps", "Keep answers tied to approved sources, identify missing business information, update sources, and let your team step in when a conversation needs a person."]
 ];
 
 const useCases = [
@@ -36,8 +36,8 @@ const useCases = [
 
 const businessPoints = [
   "Answers based on approved business sources",
-  "Teams can review and manage sources",
-  "Conversations and leads stay in the portal",
+  "Teams can review gaps and manage sources",
+  "Unified inbox for messages, comments, and leads",
   "Human handoff when needed",
   "Usage and access are controlled",
   "Website first, supported channels as enabled"
@@ -52,11 +52,21 @@ const pricingHighlights = [
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
+  "@id": "https://snoodlr.com/#software",
   name: "Snoodlr",
+  alternateName: "Snoodlr AI business assistant",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   url: "https://snoodlr.com/",
   description: "AI business assistant trained on business content to answer questions, capture leads, and support customer conversations.",
+  featureList: assistantFeatures.map(([title]) => title),
+  audience: {
+    "@type": "BusinessAudience",
+    audienceType: "Local businesses, online stores, service providers, appointment-based businesses, and agencies"
+  },
+  publisher: {
+    "@id": "https://snoodlr.com/#organization"
+  },
   offers: {
     "@type": "Offer",
     price: "0",
@@ -67,10 +77,17 @@ const jsonLd = {
 
 <BaseLayout
   title="Snoodlr - AI business assistant for leads, orders, and support"
-  description="Snoodlr trains an AI assistant on your website, documents, policies, and store data to answer customers, capture leads, and support real outcomes."
+  description="Snoodlr trains an AI assistant on your business content to answer customers, capture leads, and manage messages and comments in one unified inbox."
   ogTitle="Snoodlr - AI business assistant"
-  ogDescription="Train an AI assistant on your business sources so it can answer customers, capture leads, and help them take the next step."
+  ogDescription="Train an AI assistant on your business sources and manage customer messages, comments, leads, and handoffs from one unified inbox."
   path="/"
+  keywords={[
+    "AI assistant for business websites",
+    "AI chatbot for lead capture",
+    "AI support assistant",
+    "AI assistant for online stores",
+    "approved-source AI assistant"
+  ]}
   jsonLd={jsonLd}
 >
   <main>

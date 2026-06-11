@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://snoodlr.com/sitemap.xml
+LLMs: https://snoodlr.com/llms.txt

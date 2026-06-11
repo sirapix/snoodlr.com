@@ -25,7 +25,7 @@ const plans = [
     cta: "Talk to us",
     href: "/contact",
     featured: true,
-    features: ["Higher conversation usage", "More properties or assistants", "Advanced lead capture", "Supported channels as enabled", "WordPress plugin availability"]
+    features: ["Higher conversation usage", "More properties or assistants", "Advanced lead capture", "Unified inbox for supported channels", "Social messages and comments as enabled", "WordPress plugin availability"]
   },
   {
     name: "Business",
@@ -35,7 +35,7 @@ const plans = [
     cta: "Contact us",
     href: "/contact",
     featured: false,
-    features: ["Multiple properties", "Team handoff workflows", "WooCommerce support through the plugin", "Usage and access controls", "Analytics and conversation review"]
+    features: ["Multiple properties", "Team handoff workflows", "WooCommerce support through the plugin", "Usage and access controls", "Analytics, comments, and conversation review"]
   },
   {
     name: "Enterprise",
@@ -54,6 +54,9 @@ const rows = [
   ["Approved website, docs, and policies", true, true, true, true],
   ["Lead capture", "Basic", "Advanced", "Advanced", "Custom"],
   ["Conversations and leads portal", true, true, true, true],
+  ["Unified inbox for connected channels", false, true, true, true],
+  ["Social messages and comments", false, "As enabled", "As enabled", "As enabled"],
+  ["Conversation review and missing-info updates", "Basic", "Advanced", "Advanced", "Custom"],
   ["Higher usage limits", false, true, true, true],
   ["More properties or assistants", false, true, true, true],
   ["Supported channels beyond website", false, "As enabled", "As enabled", "As enabled"],
@@ -68,9 +71,15 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    "@id": "https://snoodlr.com/#software",
     name: "Snoodlr",
     applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
     url: "https://snoodlr.com/pricing",
+    description: "Snoodlr pricing starts free, with paid plans for unified inbox capabilities, higher usage, more properties, supported channels, and advanced controls.",
+    publisher: {
+      "@id": "https://snoodlr.com/#organization"
+    },
     offers: plans.map((plan) => ({
       "@type": "Offer",
       name: plan.name,
@@ -82,10 +91,17 @@ const jsonLd = [
 
 <BaseLayout
   title="Pricing - Snoodlr AI business assistant"
-  description="Start Snoodlr for free, then talk with our team about paid plans for higher usage, more properties, more channels, and advanced controls."
+  description="Start Snoodlr for free, then talk with our team about paid plans for a unified inbox, higher usage, more properties, more channels, and advanced controls."
   ogTitle="Pricing - Snoodlr"
-  ogDescription="Free to start, with paid Snoodlr plans for higher usage, more properties, more channels, and advanced controls."
+  ogDescription="Free to start, with paid Snoodlr plans for unified inbox capabilities, higher usage, more properties, more channels, and advanced controls."
   path="/pricing"
+  keywords={[
+    "Snoodlr pricing",
+    "AI business assistant pricing",
+    "AI chatbot pricing",
+    "AI lead capture pricing",
+    "WooCommerce AI assistant pricing"
+  ]}
   jsonLd={jsonLd}
 >
   <main class="relative overflow-hidden">
