@@ -9,27 +9,44 @@ import Eyebrow from "../components/Eyebrow.astro";
 import { APP_LOGIN_URL } from "../lib/links";
 
 const outcomes = [
-  ["Capture qualified leads", "Engage visitors the moment intent is highest and collect the details you need to follow up."],
-  ["Answer common questions instantly", "Snoodlr replies in seconds with answers grounded in your business, not generic AI fluff."],
-  ["Guide customers to the next step", "From browsing to booking, your assistant nudges customers toward the action that matters."],
-  ["Support orders and follow-ups", "Handle order questions, post-purchase support, and reminders without growing your team."],
-  ["Work from your website", "Drop Snoodlr onto any site and let it work where your customers already are."]
+  ["Answer from approved business content", "Use your website, uploaded documents, store policies, and product data to reply with answers customers can trust."],
+  ["Capture the details your team needs", "Collect name, phone, email, and request details while the customer is still interested."],
+  ["Save leads for follow-up", "Keep inquiries, contact details, and conversation history inside the Snoodlr portal so your team can follow up."],
+  ["Handle everyday questions instantly", "Answer delivery, payment, refund, return, hours, pricing, and contact questions without making visitors wait."],
+  ["Move visitors toward the next step", "Help shoppers find products, request an order, book a call, or ask for a human when they need one."],
+  ["Bring your team in when it matters", "Let humans step into conversations when a request needs judgment, approval, or a personal touch."]
+];
+
+const assistantFeatures = [
+  ["Answer from your real business content", "Use approved website pages, uploaded documents, policies, FAQs, and store data so replies reflect how your business actually works."],
+  ["Capture leads while customers are interested", "Ask for name, phone, email, and request details in the flow of the conversation, then save them for follow-up."],
+  ["Support product discovery and order requests", "Help shoppers compare products, ask about availability, and send order requests for your team to confirm."],
+  ["Manage conversations in one place", "Review chats, lead details, customer questions, and follow-up needs from the Snoodlr portal."],
+  ["Work across supported customer channels", "Start with your website. Connect WhatsApp, Facebook/Messenger, WordPress/WooCommerce, and more as supported integrations are enabled."],
+  ["Stay in control with human handoff", "Keep answers tied to approved sources and let your team step in when a conversation needs a person."]
 ];
 
 const useCases = [
-  ["Local businesses", "Answer questions, capture inquiries, and book more visits."],
-  ["Online stores", "Help shoppers find the right product and complete the order."],
-  ["Service providers", "Qualify leads and route the right ones to your team."],
-  ["Clinics & appointments", "Triage questions and help patients book the right slot."],
-  ["Agencies & client sites", "Deploy Snoodlr across client websites with isolated data."]
+  ["Local businesses", "Answer hours, pricing, delivery, and contact questions while collecting inquiries for follow-up."],
+  ["Online stores", "Help shoppers find products, ask about availability, and send order requests for your team to confirm."],
+  ["Service providers", "Qualify service inquiries, collect request details, and route the right conversations to your team."],
+  ["Appointment-based businesses", "Answer common admin questions and help visitors request the right appointment."],
+  ["Agencies & client sites", "Deploy Snoodlr across client websites with separate business data and source controls."]
 ];
 
 const businessPoints = [
-  "Built for business conversations",
-  "Designed for leads, orders, and support",
-  "Controlled assistant actions",
+  "Answers based on approved business sources",
+  "Teams can review and manage sources",
+  "Conversations and leads stay in the portal",
   "Human handoff when needed",
-  "Tenant-scoped business data"
+  "Usage and access are controlled",
+  "Website first, supported channels as enabled"
+];
+
+const pricingHighlights = [
+  ["Free to start", "Launch on your website and see how Snoodlr handles real customer questions before choosing a paid plan."],
+  ["Paid plans as you grow", "Upgrade for higher usage, more properties, more channels, and advanced controls."],
+  ["Business or Enterprise", "Contact us for larger teams, rollout support, custom limits, and channel requirements."]
 ];
 
 const jsonLd = {
@@ -39,7 +56,7 @@ const jsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   url: "https://snoodlr.com/",
-  description: "AI business assistant that turns customer conversations into leads, orders, and support outcomes.",
+  description: "AI business assistant trained on business content to answer questions, capture leads, and support customer conversations.",
   offers: {
     "@type": "Offer",
     price: "0",
@@ -50,9 +67,9 @@ const jsonLd = {
 
 <BaseLayout
   title="Snoodlr - AI business assistant for leads, orders, and support"
-  description="Snoodlr is an AI business assistant that turns customer conversations into qualified leads, orders, and support outcomes - right from your website."
+  description="Snoodlr trains an AI assistant on your website, documents, policies, and store data to answer customers, capture leads, and support real outcomes."
   ogTitle="Snoodlr - AI business assistant"
-  ogDescription="Turn customer conversations into leads, orders, and support. Snoodlr answers customers instantly and helps move them toward real outcomes."
+  ogDescription="Train an AI assistant on your business sources so it can answer customers, capture leads, and help them take the next step."
   path="/"
   jsonLd={jsonLd}
 >
@@ -67,8 +84,8 @@ const jsonLd = {
         <h1 class="mx-auto mt-6 max-w-4xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
           Turn customer conversations into <span class="text-primary">leads, orders, and support.</span>
         </h1>
-        <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-          Snoodlr gives your business an AI assistant that answers customers, captures qualified leads, and helps move conversations toward real outcomes.
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+          Train an AI assistant on your website, documents, policies, and store data so it can answer from your business, capture leads, and help customers take the next step.
         </p>
         <div class="mt-9 flex flex-wrap justify-center gap-3">
           <ButtonLink href={APP_LOGIN_URL}>Start free</ButtonLink>
@@ -89,7 +106,7 @@ const jsonLd = {
                   {[
                     ["New leads", "12", true],
                     ["Active chats", "4", false],
-                    ["Orders", "7", false],
+                    ["Order requests", "7", false],
                     ["Follow-ups", "3", false]
                   ].map(([label, value, active]) => (
                     <div class={`mb-1 flex items-center justify-between rounded-lg px-3 py-2 ${active ? "bg-primary/10 text-foreground" : "text-muted-foreground"}`}>
@@ -101,24 +118,24 @@ const jsonLd = {
                 <div class="col-span-12 p-5 md:col-span-8">
                   <div class="mb-4 flex items-center justify-between gap-4">
                     <div>
-                      <p class="font-semibold">Maya from Brooklyn</p>
-                      <p class="text-xs text-muted-foreground">Visiting /pricing &middot; just now</p>
+                      <p class="font-semibold">Jordan from Austin</p>
+                      <p class="text-xs text-muted-foreground">Visiting /products &middot; just now</p>
                     </div>
                     <span class="rounded-full bg-primary/15 px-2.5 py-1 text-xs font-medium text-primary">Qualified lead</span>
                   </div>
                   <ConnectedChannels compact class="mb-4 md:hidden" labels={{ heading: "Channels" }} />
                   <div class="space-y-3">
                     <div class="flex justify-start">
-                      <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">Hi! Do you offer same-day delivery in NYC?</div>
+                      <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">Hi! Do you deliver to my area?</div>
                     </div>
                     <div class="flex justify-end">
-                      <div class="max-w-[78%] rounded-2xl bg-primary px-4 py-2.5 text-sm leading-relaxed text-primary-foreground">Yes - within Brooklyn and Manhattan for orders before 2pm. Want me to put one together for you?</div>
+                      <div class="max-w-[78%] rounded-2xl bg-primary px-4 py-2.5 text-sm leading-relaxed text-primary-foreground">Share your ZIP code and preferred date, and I can save the request for our team to confirm.</div>
                     </div>
                     <div class="flex justify-start">
-                      <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">Yes please, 2 of the medium bouquets.</div>
+                      <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">78704, hoping for Friday. My email is jordan@example.com.</div>
                     </div>
                     <div class="rounded-xl border border-primary/30 bg-primary/5 p-3 text-xs text-muted-foreground">
-                      <span class="font-medium text-primary">Snoodlr</span> created an order draft &middot; $98.00 &middot; ready to confirm
+                      <span class="font-medium text-primary">Snoodlr</span> saved lead details &middot; delivery request &middot; Friday follow-up
                     </div>
                   </div>
                 </div>
@@ -138,7 +155,7 @@ const jsonLd = {
             <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Most websites lose conversations before they ever turn into business. A pricing question, a delivery question, an availability check - every minute of silence costs you a customer.</p>
           </div>
           <div class="rounded-3xl border border-border/60 bg-surface/60 p-8 md:p-10">
-            <p class="text-2xl font-medium leading-snug tracking-tight md:text-3xl">Snoodlr responds instantly and captures intent while it's high - so the conversation actually becomes an outcome.</p>
+            <p class="text-2xl font-medium leading-snug tracking-tight md:text-3xl">Snoodlr responds from your approved content and captures intent while it's high - so the conversation actually becomes an outcome.</p>
           </div>
         </div>
       </div>
@@ -171,8 +188,8 @@ const jsonLd = {
         <div class="mt-12 grid gap-6 md:grid-cols-3">
           {[
             ["Add your business", "Tell Snoodlr who you are, what you sell, and how you help customers."],
-            ["Connect your website or content", "Point Snoodlr at your site, docs, or product catalog so it answers with your truth."],
-            ["Snoodlr starts helping customers", "Your assistant goes live - answering, capturing, and converting around the clock."]
+            ["Connect approved sources", "Point Snoodlr at your website, documents, policies, FAQs, or store data so answers come from your business."],
+            ["Snoodlr starts helping customers", "Your assistant goes live - answering questions, collecting leads, and handing off when a person should step in."]
           ].map(([title, description], index) => (
             <div class="relative overflow-hidden rounded-2xl border border-border/60 bg-card p-8">
               <p class="font-display text-6xl font-semibold text-primary/30">{String(index + 1).padStart(2, "0")}</p>
@@ -187,9 +204,27 @@ const jsonLd = {
     <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28">
       <div class="mx-auto max-w-7xl px-6">
         <div class="max-w-3xl">
+          <Eyebrow label="What it needs" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Everything your AI assistant needs to help customers.</h2>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Give Snoodlr the sources, channels, and controls that make it useful for real customer conversations.</p>
+        </div>
+        <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {assistantFeatures.map(([title, description]) => (
+            <div class="rounded-2xl border border-border/60 bg-card p-7 transition-colors hover:border-primary/40">
+              <h3 class="text-xl font-semibold tracking-tight">{title}</h3>
+              <p class="mt-2 text-muted-foreground">{description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
           <Eyebrow label="A closer look" />
           <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">One assistant, working across your business.</h2>
-          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">A clean dashboard for your team, a thoughtful widget for your customers, and a smooth path from question to outcome.</p>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">A clean portal for your team, a thoughtful website widget for your customers, and supported channels you can connect as your business grows.</p>
         </div>
         <div class="mt-12 grid gap-6 lg:grid-cols-2">
           <BrowserFrame title="snoodlr.app - Dashboard" class="w-full">
@@ -198,7 +233,7 @@ const jsonLd = {
                 {[
                   ["Conversations", "1,284"],
                   ["Leads captured", "342"],
-                  ["Orders assisted", "97"],
+                  ["Order requests", "97"],
                   ["Avg. response", "1.2s"]
                 ].map(([label, value]) => (
                   <div class="rounded-xl border border-border/60 bg-surface/70 p-4">
@@ -217,7 +252,7 @@ const jsonLd = {
             </div>
           </BrowserFrame>
 
-          <BrowserFrame title="yourshop.com" class="w-full">
+          <BrowserFrame title="yourbusiness.com" class="w-full">
             <div class="relative h-[360px] bg-grid">
               <div class="absolute bottom-4 right-4 w-[300px] overflow-hidden rounded-2xl border border-border-strong/60 bg-surface shadow-frame">
                 <div class="flex items-center gap-2 bg-primary px-4 py-3 text-primary-foreground">
@@ -229,8 +264,8 @@ const jsonLd = {
                 </div>
                 <div class="space-y-2 p-3 text-xs">
                   <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">Hi! Looking for something specific?</div>
-                  <div class="ml-auto max-w-[85%] rounded-xl bg-primary px-3 py-2 text-primary-foreground">Do you ship to Texas?</div>
-                  <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">Yes - free 2-day shipping on orders over $50.</div>
+                  <div class="ml-auto max-w-[85%] rounded-xl bg-primary px-3 py-2 text-primary-foreground">What are your payment options?</div>
+                  <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">We accept card, bank transfer, and cash on pickup. Want a team member to confirm the best option?</div>
                 </div>
               </div>
             </div>
@@ -262,7 +297,8 @@ const jsonLd = {
           <div>
             <Eyebrow label="WordPress & WooCommerce" />
             <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Power up your WordPress site or WooCommerce store with Snoodlr.</h2>
-            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Connect Snoodlr to your website so your assistant can help customers with richer answers, product discovery, order support, and business-specific conversations.</p>
+            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Connect the Snoodlr WordPress plugin so your assistant can answer from your pages, policies, products, and WooCommerce store context.</p>
+            <p class="mt-3 text-sm font-medium text-muted-foreground">WooCommerce features require the connected Snoodlr WordPress plugin.</p>
             <div class="mt-8">
               <ButtonLink href="#start">Get the plugin</ButtonLink>
             </div>
@@ -271,9 +307,10 @@ const jsonLd = {
             <div class="space-y-4">
               {[
                 "Product discovery from your catalog",
-                "Order lookup and post-purchase support",
-                "Business-specific Q&A from your pages",
-                "Lead capture into your existing flow"
+                "Availability and product-policy questions",
+                "Order requests and pending order details for your team to confirm",
+                "Store-specific Q&A from products, pages, and policies",
+                "Lead capture and human handoff from your website"
               ].map((item) => (
                 <div class="flex items-start gap-3">
                   <span class="mt-1 h-5 w-5 flex-none rounded-md bg-primary/15 ring-1 ring-primary/40"></span>
@@ -291,6 +328,7 @@ const jsonLd = {
         <div class="max-w-3xl">
           <Eyebrow label="Built for business" />
           <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Confidence baked into every conversation.</h2>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Snoodlr is designed around approved sources, team visibility, and practical controls so your assistant stays useful without becoming a black box.</p>
         </div>
         <div class="mt-12 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {businessPoints.map((point) => (
@@ -299,6 +337,35 @@ const jsonLd = {
               <p class="font-medium">{point}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28" id="pricing">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <Eyebrow label="Pricing" />
+            <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Start free. Scale when the assistant is working.</h2>
+            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Snoodlr is free to start. Paid plans are available for higher usage, more properties, more channels, and advanced controls, with Business and Enterprise support handled with our team.</p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href={APP_LOGIN_URL}>Start free</ButtonLink>
+              <ButtonLink href="/pricing" variant="secondary">See pricing</ButtonLink>
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3 lg:grid-cols-1">
+            {pricingHighlights.map(([title, description]) => (
+              <div class="rounded-2xl border border-border/60 bg-card p-6">
+                <div class="flex items-start gap-3">
+                  <CheckIcon />
+                  <div>
+                    <h3 class="font-semibold tracking-tight">{title}</h3>
+                    <p class="mt-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

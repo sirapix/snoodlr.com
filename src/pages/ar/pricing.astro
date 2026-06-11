@@ -10,61 +10,60 @@ const appLoginHref = appLoginUrl("ar");
 
 const plans = [
   {
-    name: "المجانية",
+    name: "البدء المجاني",
     price: "$0",
-    cadence: "دائمًا",
-    description: "جرّب Snoodlr على موقعك دون أي التزام.",
+    cadence: "للبدء",
+    description: "جرّب Snoodlr على موقعك واعرف ما يسأل عنه العملاء قبل اختيار خطة مدفوعة.",
     cta: "ابدأ مجانًا",
     href: appLoginHref,
     featured: false,
-    features: ["مساعد ذكاء اصطناعي واحد", "حتى 100 محادثة شهريًا", "ودجت الموقع", "جمع عملاء محتملين أساسي", "إشعارات بالبريد الإلكتروني"]
+    features: ["مساعد للموقع", "مصادر نشاط معتمدة", "جمع عملاء أساسي", "محادثات داخل البوابة", "ترقية بمساعدة الفريق"]
   },
   {
-    name: "الأساسية",
-    price: "$15",
-    cadence: "/ شهريًا",
-    description: "للأنشطة الصغيرة الجاهزة للنمو.",
-    cta: "ابدأ الأساسية",
-    href: appLoginHref,
+    name: "النمو",
+    price: "مدفوعة",
+    cadence: "مع نموك",
+    description: "للأنشطة التي تحتاج إلى استخدام أعلى، ومواقع أو فروع أكثر، وقنوات وتحكم أكبر.",
+    cta: "تواصل معنا",
+    href: "/ar/contact",
     featured: true,
-    features: ["مساعد ذكاء اصطناعي واحد", "حتى 2,000 محادثة شهريًا", "ودجت الموقع + إضافة ووردبريس", "جمع وتوجيه متقدم للعملاء", "نبرة مخصصة للنشاط", "دعم بريد إلكتروني بأولوية"]
+    features: ["استخدام محادثات أعلى", "مواقع أو مساعدين أكثر", "جمع عملاء متقدم", "قنوات مدعومة عند تفعيلها", "توفر إضافة ووردبريس"]
   },
   {
     name: "الأعمال",
-    price: "$50",
-    cadence: "/ شهريًا",
-    description: "للفرق التي تحتاج إلى حجم وتحكم أكبر.",
-    cta: "ابدأ الأعمال",
-    href: appLoginHref,
+    price: "تواصل معنا",
+    cadence: "",
+    description: "للفرق التي تحتاج إلى دعم إطلاق، ومراجعة محادثات، واحتياجات قنوات أوسع.",
+    cta: "تواصل معنا",
+    href: "/ar/contact",
     featured: false,
-    features: ["3 مساعدين بالذكاء الاصطناعي", "محادثات غير محدودة", "ودجت الموقع + ووردبريس + API", "جمع عملاء متقدم ومزامنة CRM", "نبرة وتدفقات مخصصة", "تعاون الفريق والتحويلات", "دعم بأولوية", "لوحة تحليلات"]
+    features: ["عدة مواقع أو فروع", "تحويلات عمل للفريق", "دعم WooCommerce عبر الإضافة", "تحكم في الاستخدام والصلاحيات", "تحليلات ومراجعة المحادثات"]
   },
   {
     name: "المؤسسات",
     price: "مخصص",
     cadence: "",
-    description: "إعداد مخصص، واتفاقيات خدمة، وتنفيذ خاص.",
+    description: "للمؤسسات الأكبر التي تحتاج إلى حدود مخصصة أو تأهيل أو متطلبات تكامل خاصة.",
     cta: "تواصل مع المبيعات",
     href: "/ar/contact",
     featured: false,
-    features: ["مساعدون غير محدودين", "محادثات غير محدودة", "كل التكاملات + تنفيذات مخصصة", "مدير حساب مخصص", "SSO وأمان متقدم", "تدريب ذكاء اصطناعي على بياناتك", "ضمان SLA", "تأهيل كامل بمساعدة الفريق"]
+    features: ["حدود استخدام ومواقع مخصصة", "تخطيط الإطلاق", "مراجعة متطلبات القنوات", "خيارات دعم بأولوية", "نقاش أمني وشرائي"]
   }
 ];
 
 const rows = [
-  ["المحادثات", "100/شهر", "2,000/شهر", "غير محدود", "غير محدود"],
-  ["مساعدو الذكاء الاصطناعي", "1", "1", "3", "غير محدود"],
   ["ودجت الموقع", true, true, true, true],
-  ["إضافة ووردبريس", false, true, true, true],
-  ["وصول API", false, false, true, true],
-  ["نبرة وتدفقات مخصصة", false, true, true, true],
-  ["CRM / تحويلات للفريق", false, false, true, true],
-  ["لوحة التحليلات", false, false, true, true],
-  ["دعم بأولوية", false, true, true, true],
-  ["مدير حساب مخصص", false, false, false, true],
-  ["SSO وأمان متقدم", false, false, false, true],
-  ["تدريب ذكاء اصطناعي مخصص", false, false, false, true],
-  ["ضمان SLA", false, false, false, true]
+  ["الموقع والمستندات والسياسات المعتمدة", true, true, true, true],
+  ["جمع العملاء المحتملين", "أساسي", "متقدم", "متقدم", "مخصص"],
+  ["بوابة المحادثات والعملاء", true, true, true, true],
+  ["حدود استخدام أعلى", false, true, true, true],
+  ["مواقع أو مساعدين أكثر", false, true, true, true],
+  ["قنوات مدعومة خارج الموقع", false, "عند التفعيل", "عند التفعيل", "عند التفعيل"],
+  ["إضافة ووردبريس", false, "متاحة", "متاحة", "متاحة"],
+  ["دعم متجر WooCommerce", false, "مع الإضافة", "مع الإضافة", "مع الإضافة"],
+  ["تحكم متقدم", false, true, true, true],
+  ["دعم الإطلاق", false, false, true, true],
+  ["حدود أو متطلبات مخصصة", false, false, "نقاش", "مخصص"]
 ];
 
 const jsonLd = {
@@ -77,8 +76,7 @@ const jsonLd = {
   offers: plans.map((plan) => ({
     "@type": "Offer",
     name: plan.name,
-    price: plan.price.startsWith("$") ? plan.price.replace("$", "") : "0",
-    priceCurrency: "USD"
+    ...(plan.price === "$0" ? { price: "0", priceCurrency: "USD" } : {})
   }))
 };
 ---
@@ -86,9 +84,9 @@ const jsonLd = {
 <BaseLayout
   lang="ar"
   title="الأسعار - Snoodlr مساعد أعمال بالذكاء الاصطناعي"
-  description="أسعار بسيطة وواضحة لـ Snoodlr. ابدأ مجانًا ثم توسع مع خطط الأساسية أو الأعمال. للمؤسسات، تواصل معنا."
+  description="ابدأ Snoodlr مجانًا، ثم تواصل مع فريقنا حول الخطط المدفوعة لاستخدام أعلى ومواقع أكثر وقنوات إضافية وتحكم متقدم."
   ogTitle="الأسعار - Snoodlr"
-  ogDescription="أسعار بسيطة لمساعد أعمالك بالذكاء الاصطناعي: مجانية، أساسية، أعمال، ومؤسسات."
+  ogDescription="Snoodlr مجاني للبدء، مع خطط مدفوعة لاستخدام أعلى ومواقع أكثر وقنوات إضافية وتحكم متقدم."
   path="/ar/pricing"
   jsonLd={jsonLd}
 >
@@ -100,7 +98,7 @@ const jsonLd = {
         <div class="mx-auto max-w-3xl text-center">
           <Eyebrow label="الأسعار" />
           <h1 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">أسعار بسيطة. نتائج جدية.</h1>
-          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">ابدأ مجانًا وقم بالترقية عندما تكون جاهزًا. بدون رسوم مخفية وبدون التزام سنوي.</p>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">ابدأ مجانًا على موقعك. الخطط المدفوعة متاحة لاستخدام أعلى، ومواقع أكثر، وقنوات إضافية، وتحكم متقدم.</p>
         </div>
 
         <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -128,7 +126,7 @@ const jsonLd = {
           ))}
         </div>
 
-        <p class="mt-8 text-center text-sm text-muted-foreground">كل الخطط المدفوعة تشمل تجربة مجانية لمدة 14 يومًا. لا حاجة لبطاقة ائتمان للبدء. يمكنك الإلغاء في أي وقت.</p>
+        <p class="mt-8 text-center text-sm text-muted-foreground">تفعيل الخطط المدفوعة والفوترة يتمان مع فريقنا حاليًا، حتى تناسب أسعار الأعمال والمؤسسات خطة الإطلاق.</p>
       </div>
     </section>
 
@@ -137,7 +135,7 @@ const jsonLd = {
         <div class="max-w-3xl">
           <Eyebrow label="المقارنة" />
           <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">ما الذي تتضمنه الخطط؟</h2>
-          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">كل خطة تمنحك تجربة Snoodlr الأساسية. قم بالترقية لمزيد من الحجم والمساعدين والتحكم.</p>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">كل خطة تبدأ بتجربة Snoodlr الأساسية. قم بالترقية عندما تحتاج إلى حجم أكبر، أو مواقع أكثر، أو قنوات مدعومة، أو تحكم أعلى.</p>
         </div>
 
         <div class="mt-12 overflow-x-auto">

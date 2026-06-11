@@ -2,6 +2,7 @@
 import BaseLayout from "../../components/BaseLayout.astro";
 import BrowserFrame from "../../components/BrowserFrame.astro";
 import ButtonLink from "../../components/ButtonLink.astro";
+import CheckIcon from "../../components/CheckIcon.astro";
 import ConnectedChannels from "../../components/ConnectedChannels.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
@@ -10,27 +11,44 @@ import { appLoginUrl } from "../../lib/links";
 const appLoginHref = appLoginUrl("ar");
 
 const outcomes = [
-  ["اجمع عملاء محتملين مؤهلين", "تفاعل مع الزوار عندما تكون نية الشراء أو التواصل في أعلى مستوياتها، واجمع التفاصيل التي يحتاجها فريقك للمتابعة."],
-  ["أجب عن الأسئلة المتكررة فورًا", "يرد Snoodlr خلال ثوان بإجابات مبنية على معلومات نشاطك، لا بردود عامة."],
-  ["وجّه العملاء إلى الخطوة التالية", "من التصفح إلى الحجز أو الطلب، يساعد المساعد العميل على الوصول إلى الإجراء المناسب."],
-  ["ادعم الطلبات والمتابعات", "تعامل مع أسئلة الطلبات والدعم بعد الشراء والتذكيرات دون زيادة ضغط الفريق."],
-  ["اعمل من داخل موقعك", "أضف Snoodlr إلى أي موقع واجعله يعمل حيث يوجد عملاؤك بالفعل."]
+  ["أجب من محتوى نشاطك المعتمد", "استخدم موقعك، ومستنداتك المرفوعة، وسياسات المتجر، وبيانات المنتجات لتقديم إجابات يثق بها العملاء."],
+  ["اجمع التفاصيل التي يحتاجها فريقك", "اجمع الاسم ورقم الهاتف والبريد الإلكتروني وتفاصيل الطلب بينما اهتمام العميل ما زال حاضرًا."],
+  ["احفظ العملاء المحتملين للمتابعة", "احتفظ بالاستفسارات وبيانات التواصل وسجل المحادثة داخل بوابة Snoodlr حتى يتابع فريقك بسهولة."],
+  ["أجب عن الأسئلة اليومية فورًا", "أجب عن أسئلة التوصيل والدفع والاسترجاع والمرتجعات والمواعيد والأسعار والتواصل دون انتظار."],
+  ["وجّه الزوار إلى الخطوة التالية", "ساعد المتسوقين على إيجاد المنتجات، أو إرسال طلب، أو حجز مكالمة، أو طلب التحدث مع شخص عند الحاجة."],
+  ["أدخل فريقك عندما يلزم الأمر", "اسمح لفريقك بالدخول إلى المحادثة عندما يحتاج الطلب إلى تقدير أو موافقة أو لمسة شخصية."]
+];
+
+const assistantFeatures = [
+  ["يجيب من محتوى نشاطك الحقيقي", "استخدم صفحات موقعك المعتمدة، والمستندات، والسياسات، والأسئلة المتكررة، وبيانات المتجر حتى تعكس الإجابات طريقة عمل نشاطك."],
+  ["يجمع العملاء المحتملين وقت الاهتمام", "اطلب الاسم ورقم الهاتف والبريد الإلكتروني وتفاصيل الطلب ضمن المحادثة، ثم احفظها للمتابعة."],
+  ["يدعم اكتشاف المنتجات وطلبات الشراء", "ساعد المتسوقين على مقارنة المنتجات، والسؤال عن التوفر، وإرسال طلبات يتأكد منها فريقك."],
+  ["يدير المحادثات في مكان واحد", "راجع المحادثات وبيانات العملاء والأسئلة واحتياجات المتابعة من بوابة Snoodlr."],
+  ["يعمل عبر القنوات المدعومة", "ابدأ من موقعك. اربط واتساب وفيسبوك/ماسنجر وووردبريس/WooCommerce والمزيد عند تفعيل التكاملات المدعومة."],
+  ["يبقي التحكم بيد فريقك", "اجعل الإجابات مرتبطة بالمصادر المعتمدة، واسمح لفريقك بالتدخل عندما تحتاج المحادثة إلى إنسان."]
 ];
 
 const useCases = [
-  ["الأنشطة المحلية", "أجب عن الأسئلة، واجمع الاستفسارات، واحجز زيارات أكثر."],
-  ["المتاجر الإلكترونية", "ساعد المتسوقين على اختيار المنتج المناسب وإكمال الطلب."],
-  ["مقدمو الخدمات", "أهّل العملاء المحتملين ووجّه المناسبين منهم إلى فريقك."],
-  ["العيادات والمواعيد", "فرز الأسئلة وساعد العملاء على حجز الموعد المناسب."],
-  ["الوكالات ومواقع العملاء", "انشر Snoodlr على مواقع العملاء مع فصل بيانات كل نشاط."]
+  ["الأنشطة المحلية", "أجب عن أسئلة المواعيد والأسعار والتوصيل والتواصل، واجمع الاستفسارات للمتابعة."],
+  ["المتاجر الإلكترونية", "ساعد المتسوقين على اكتشاف المنتجات، والسؤال عن التوفر، وإرسال طلبات يتأكد منها فريقك."],
+  ["مقدمو الخدمات", "أهّل استفسارات الخدمة، واجمع تفاصيل الطلب، ووجّه المحادثات المناسبة إلى فريقك."],
+  ["الأنشطة المعتمدة على المواعيد", "أجب عن الأسئلة الإدارية الشائعة وساعد الزوار على طلب الموعد المناسب."],
+  ["الوكالات ومواقع العملاء", "انشر Snoodlr على مواقع العملاء مع فصل بيانات كل نشاط والتحكم في مصادره."]
 ];
 
 const businessPoints = [
-  "مصمم لمحادثات الأعمال",
-  "مبني للعملاء المحتملين والطلبات والدعم",
-  "إجراءات مساعد يمكن التحكم بها",
+  "إجابات مبنية على مصادر النشاط المعتمدة",
+  "يمكن للفريق مراجعة المصادر وإدارتها",
+  "المحادثات والعملاء داخل البوابة",
   "تحويل إلى إنسان عند الحاجة",
-  "بيانات كل نشاط معزولة ومحددة النطاق"
+  "تحكم في الاستخدام والصلاحيات",
+  "ابدأ بالموقع ثم فعّل القنوات المدعومة"
+];
+
+const pricingHighlights = [
+  ["مجاني للبدء", "أطلق Snoodlr على موقعك وشاهد كيف يتعامل مع أسئلة العملاء الحقيقية قبل اختيار خطة مدفوعة."],
+  ["خطط مدفوعة مع النمو", "قم بالترقية لاستخدام أعلى، وعدد أكبر من المواقع أو الفروع، وقنوات أكثر، وتحكم متقدم."],
+  ["للأعمال والمؤسسات", "تواصل معنا للفرق الأكبر، ودعم الإطلاق، وحدود مخصصة، ومتطلبات القنوات."]
 ];
 
 const jsonLd = {
@@ -40,7 +58,7 @@ const jsonLd = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   url: "https://snoodlr.com/ar/",
-  description: "مساعد أعمال بالذكاء الاصطناعي يحول محادثات العملاء إلى عملاء محتملين وطلبات ودعم.",
+  description: "مساعد أعمال بالذكاء الاصطناعي يتدرب على محتوى النشاط ليجيب عن الأسئلة ويجمع العملاء المحتملين ويدعم محادثات العملاء.",
   inLanguage: "ar",
   offers: {
     "@type": "Offer",
@@ -53,9 +71,9 @@ const jsonLd = {
 <BaseLayout
   lang="ar"
   title="Snoodlr - مساعد أعمال بالذكاء الاصطناعي للعملاء المحتملين والطلبات والدعم"
-  description="Snoodlr مساعد أعمال بالذكاء الاصطناعي يحول محادثات العملاء إلى عملاء محتملين مؤهلين وطلبات ودعم، مباشرة من موقعك."
+  description="يدرّب Snoodlr مساعدًا ذكيًا على موقعك ومستنداتك وسياساتك وبيانات متجرك ليجيب عن العملاء ويجمع العملاء المحتملين ويدعم النتائج."
   ogTitle="Snoodlr - مساعد أعمال بالذكاء الاصطناعي"
-  ogDescription="حوّل محادثات العملاء إلى عملاء محتملين وطلبات ودعم. يجيب Snoodlr فورًا ويساعد العملاء على الوصول إلى نتائج حقيقية."
+  ogDescription="درّب مساعدًا ذكيًا على مصادر نشاطك ليجيب عن العملاء ويجمع العملاء المحتملين ويساعدهم على الخطوة التالية."
   path="/ar/"
   jsonLd={jsonLd}
 >
@@ -70,8 +88,8 @@ const jsonLd = {
         <h1 class="mx-auto mt-6 max-w-4xl text-balance text-5xl font-semibold leading-[1.08] tracking-tight md:text-7xl">
           حوّل محادثات العملاء إلى <span class="text-primary">عملاء محتملين وطلبات ودعم.</span>
         </h1>
-        <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-          يمنح Snoodlr نشاطك مساعدًا ذكيًا يجيب عن العملاء، يجمع العملاء المحتملين المؤهلين، ويساعد المحادثات على التحول إلى نتائج حقيقية.
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+          درّب مساعدًا ذكيًا على موقعك ومستنداتك وسياساتك وبيانات متجرك، ليجيب من معلومات نشاطك ويجمع العملاء المحتملين ويساعدهم على الخطوة التالية.
         </p>
         <div class="mt-9 flex flex-wrap justify-center gap-3">
           <ButtonLink href={appLoginHref} lang="ar">ابدأ مجانًا</ButtonLink>
@@ -90,18 +108,18 @@ const jsonLd = {
                 <ConnectedChannels
                   class="mb-4"
                   labels={{
-                    heading: "القنوات المتصلة",
+                    heading: "القنوات المدعومة",
                     widget: "الموقع",
                     whatsapp: "واتساب",
-                    instagram: "إنستغرام",
-                    facebook: "فيسبوك",
+                    facebook: "فيسبوك/ماسنجر",
+                    wordpress: "ووردبريس/WooCommerce",
                     more: "المزيد"
                   }}
                 />
                 {[
                   ["عملاء جدد", "12", true],
                   ["محادثات نشطة", "4", false],
-                  ["طلبات", "7", false],
+                  ["طلبات واردة", "7", false],
                   ["متابعات", "3", false]
                 ].map(([label, value, active]) => (
                   <div class={`mb-1 flex items-center justify-between rounded-lg px-3 py-2 ${active ? "bg-primary/10 text-foreground" : "text-muted-foreground"}`}>
@@ -113,8 +131,8 @@ const jsonLd = {
               <div class="col-span-12 p-5 md:col-span-8">
                 <div class="mb-4 flex items-center justify-between gap-4">
                   <div>
-                    <p class="font-semibold">مايا من بروكلين</p>
-                    <p class="text-xs text-muted-foreground">تزور /pricing &middot; الآن</p>
+                    <p class="font-semibold">سارة من القاهرة</p>
+                    <p class="text-xs text-muted-foreground">تزور /products &middot; الآن</p>
                   </div>
                   <span class="rounded-full bg-primary/15 px-2.5 py-1 text-xs font-medium text-primary">عميل مؤهل</span>
                 </div>
@@ -125,23 +143,23 @@ const jsonLd = {
                     heading: "القنوات",
                     widget: "الموقع",
                     whatsapp: "واتساب",
-                    instagram: "إنستغرام",
-                    facebook: "فيسبوك",
+                    facebook: "فيسبوك/ماسنجر",
+                    wordpress: "ووردبريس/WooCommerce",
                     more: "المزيد"
                   }}
                 />
                 <div class="space-y-3">
                   <div class="flex justify-start">
-                    <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">هل توفرون توصيلًا في نفس اليوم؟</div>
+                    <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">مرحبًا، هل توصلون إلى منطقتي؟</div>
                   </div>
                   <div class="flex justify-end">
-                    <div class="max-w-[78%] rounded-2xl bg-primary px-4 py-2.5 text-sm leading-relaxed text-primary-foreground">نعم، للطلبات قبل الساعة 2 مساء. هل تريدين أن أجهز الطلب لك؟</div>
+                    <div class="max-w-[78%] rounded-2xl bg-primary px-4 py-2.5 text-sm leading-relaxed text-primary-foreground">أرسلي المنطقة والتاريخ المفضل، وسأحفظ الطلب ليتأكد منه الفريق.</div>
                   </div>
                   <div class="flex justify-start">
-                    <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">نعم، باقتان متوسطتان من فضلك.</div>
+                    <div class="max-w-[78%] rounded-2xl bg-surface px-4 py-2.5 text-sm leading-relaxed text-foreground ring-1 ring-border">مدينة نصر، أفضّل يوم الجمعة. بريدي sara@example.com.</div>
                   </div>
                   <div class="rounded-xl border border-primary/30 bg-primary/5 p-3 text-xs text-muted-foreground">
-                    <span class="font-medium text-primary">Snoodlr</span> أنشأ مسودة طلب &middot; $98.00 &middot; جاهزة للتأكيد
+                    <span class="font-medium text-primary">Snoodlr</span> حفظ بيانات العميل &middot; طلب توصيل &middot; متابعة الجمعة
                   </div>
                 </div>
               </div>
@@ -160,7 +178,7 @@ const jsonLd = {
             <p class="mt-5 text-lg leading-relaxed text-muted-foreground">معظم المواقع تخسر المحادثة قبل أن تتحول إلى فرصة عمل. سؤال عن السعر أو التوصيل أو التوفر، وكل دقيقة انتظار قد تكلفك عميلاً.</p>
           </div>
           <div class="rounded-3xl border border-border/60 bg-surface/60 p-8 md:p-10">
-            <p class="text-2xl font-medium leading-snug tracking-tight md:text-3xl">يرد Snoodlr فورًا ويلتقط النية بينما هي قوية، لتتحول المحادثة إلى نتيجة فعلية.</p>
+            <p class="text-2xl font-medium leading-snug tracking-tight md:text-3xl">يرد Snoodlr من محتواك المعتمد ويلتقط نية العميل وهي قوية، لتتحول المحادثة إلى نتيجة فعلية.</p>
           </div>
         </div>
       </div>
@@ -193,8 +211,8 @@ const jsonLd = {
         <div class="mt-12 grid gap-6 md:grid-cols-3">
           {[
             ["أضف نشاطك", "أخبر Snoodlr من أنت، ماذا تبيع، وكيف تساعد عملاءك."],
-            ["اربط موقعك أو محتواك", "وجه Snoodlr إلى موقعك أو مستنداتك أو كتالوج منتجاتك ليجيب من معلوماتك الحقيقية."],
-            ["يبدأ Snoodlr بمساعدة العملاء", "يعمل المساعد مباشرة: يجيب، يجمع البيانات، ويساعد على التحويل طوال الوقت."]
+            ["اربط المصادر المعتمدة", "وجه Snoodlr إلى موقعك ومستنداتك وسياساتك وأسئلتك المتكررة أو بيانات متجرك ليجيب من معلومات نشاطك."],
+            ["يبدأ Snoodlr بمساعدة العملاء", "يعمل المساعد مباشرة: يجيب عن الأسئلة، ويجمع العملاء المحتملين، ويحوّل المحادثة إلى شخص عند الحاجة."]
           ].map(([title, description], index) => (
             <div class="relative overflow-hidden rounded-2xl border border-border/60 bg-card p-8">
               <p class="font-display text-6xl font-semibold text-primary/30">{String(index + 1).padStart(2, "0")}</p>
@@ -209,9 +227,27 @@ const jsonLd = {
     <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28">
       <div class="mx-auto max-w-7xl px-6">
         <div class="max-w-3xl">
+          <Eyebrow label="ما يحتاجه" />
+          <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">كل ما يحتاجه مساعدك الذكي لمساعدة العملاء.</h2>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">امنح Snoodlr المصادر والقنوات والتحكم الذي يجعله مفيدًا في محادثات العملاء الحقيقية.</p>
+        </div>
+        <div class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {assistantFeatures.map(([title, description]) => (
+            <div class="rounded-2xl border border-border/60 bg-card p-7 transition-colors hover:border-primary/40">
+              <h3 class="text-xl font-semibold tracking-tight">{title}</h3>
+              <p class="mt-2 text-muted-foreground">{description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="max-w-3xl">
           <Eyebrow label="نظرة أقرب" />
           <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">مساعد واحد يعمل عبر نشاطك.</h2>
-          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">لوحة واضحة لفريقك، وودجت لطيف لعملائك، ومسار سلس من السؤال إلى النتيجة.</p>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">بوابة واضحة لفريقك، وودجت لطيف لموقعك، وقنوات مدعومة يمكنك ربطها مع نمو نشاطك.</p>
         </div>
         <div class="mt-12 grid gap-6 lg:grid-cols-2">
           <BrowserFrame title="snoodlr.app - لوحة التحكم" class="w-full">
@@ -220,7 +256,7 @@ const jsonLd = {
                 {[
                   ["المحادثات", "1,284"],
                   ["العملاء", "342"],
-                  ["طلبات بمساعدة", "97"],
+                  ["طلبات واردة", "97"],
                   ["متوسط الرد", "1.2ث"]
                 ].map(([label, value]) => (
                   <div class="rounded-xl border border-border/60 bg-surface/70 p-4">
@@ -239,7 +275,7 @@ const jsonLd = {
             </div>
           </BrowserFrame>
 
-          <BrowserFrame title="yourshop.com" class="w-full">
+          <BrowserFrame title="yourbusiness.com" class="w-full">
             <div class="relative h-[360px] bg-grid">
               <div class="absolute bottom-4 left-4 w-[300px] overflow-hidden rounded-2xl border border-border-strong/60 bg-surface shadow-frame">
                 <div class="flex items-center gap-2 bg-primary px-4 py-3 text-primary-foreground">
@@ -251,8 +287,8 @@ const jsonLd = {
                 </div>
                 <div class="space-y-2 p-3 text-xs">
                   <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">مرحبًا! هل تبحث عن شيء محدد؟</div>
-                  <div class="mr-auto max-w-[85%] rounded-xl bg-primary px-3 py-2 text-primary-foreground">هل تشحنون إلى المحافظات؟</div>
-                  <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">نعم، شحن مجاني خلال يومين للطلبات فوق $50.</div>
+                  <div class="mr-auto max-w-[85%] rounded-xl bg-primary px-3 py-2 text-primary-foreground">ما خيارات الدفع المتاحة؟</div>
+                  <div class="max-w-[85%] rounded-xl bg-background/60 px-3 py-2 ring-1 ring-border">نقبل البطاقات والتحويل البنكي والدفع عند الاستلام. هل تريد أن يؤكد لك أحد أفراد الفريق الخيار الأنسب؟</div>
                 </div>
               </div>
             </div>
@@ -284,7 +320,8 @@ const jsonLd = {
           <div>
             <Eyebrow label="ووردبريس و WooCommerce" />
             <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">قوّ موقع ووردبريس أو متجر WooCommerce باستخدام Snoodlr.</h2>
-            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">اربط Snoodlr بموقعك ليساعد العملاء بإجابات أغنى، واكتشاف المنتجات، ودعم الطلبات، ومحادثات مخصصة لنشاطك.</p>
+            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">اربط إضافة Snoodlr لووردبريس حتى يجيب مساعدك من صفحاتك وسياساتك ومنتجاتك وسياق متجر WooCommerce.</p>
+            <p class="mt-3 text-sm font-medium text-muted-foreground">ميزات WooCommerce تتطلب إضافة Snoodlr المتصلة بووردبريس.</p>
             <div class="mt-8">
               <ButtonLink href={appLoginHref} lang="ar">احصل على الإضافة</ButtonLink>
             </div>
@@ -293,9 +330,10 @@ const jsonLd = {
             <div class="space-y-4">
               {[
                 "اكتشاف المنتجات من الكتالوج",
-                "متابعة الطلبات ودعم ما بعد الشراء",
-                "أسئلة وأجوبة من صفحات نشاطك",
-                "جمع العملاء المحتملين داخل تدفقك الحالي"
+                "أسئلة التوفر وسياسات المنتجات",
+                "طلبات الشراء والبيانات المعلقة ليتأكد منها فريقك",
+                "إجابات خاصة بالمتجر من المنتجات والصفحات والسياسات",
+                "جمع العملاء والتحويل إلى الفريق من موقعك"
               ].map((item) => (
                 <div class="flex items-start gap-3">
                   <span class="mt-1 h-5 w-5 flex-none rounded-md bg-primary/15 ring-1 ring-primary/40"></span>
@@ -313,6 +351,7 @@ const jsonLd = {
         <div class="max-w-3xl">
           <Eyebrow label="مصمم للأعمال" />
           <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">الثقة مدمجة في كل محادثة.</h2>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">صُمم Snoodlr حول المصادر المعتمدة، ووضوح عمل الفريق، والتحكم العملي حتى يبقى المساعد مفيدًا دون أن يتحول إلى صندوق غامض.</p>
         </div>
         <div class="mt-12 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {businessPoints.map((point) => (
@@ -321,6 +360,35 @@ const jsonLd = {
               <p class="font-medium">{point}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28" id="pricing">
+      <div class="mx-auto max-w-7xl px-6">
+        <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <Eyebrow label="الأسعار" />
+            <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">ابدأ مجانًا. توسع عندما يبدأ المساعد بتحقيق النتائج.</h2>
+            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Snoodlr مجاني للبدء. الخطط المدفوعة متاحة لاستخدام أعلى، ومواقع أو فروع أكثر، وقنوات إضافية، وتحكم متقدم، مع دعم الأعمال والمؤسسات من فريقنا.</p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href={appLoginHref} lang="ar">ابدأ مجانًا</ButtonLink>
+              <ButtonLink href="/ar/pricing" variant="secondary" lang="ar">شاهد الأسعار</ButtonLink>
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3 lg:grid-cols-1">
+            {pricingHighlights.map(([title, description]) => (
+              <div class="rounded-2xl border border-border/60 bg-card p-6">
+                <div class="flex items-start gap-3">
+                  <CheckIcon />
+                  <div>
+                    <h3 class="font-semibold tracking-tight">{title}</h3>
+                    <p class="mt-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

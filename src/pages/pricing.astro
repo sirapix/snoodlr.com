@@ -8,61 +8,60 @@ import { APP_LOGIN_URL } from "../lib/links";
 
 const plans = [
   {
-    name: "Free",
+    name: "Free start",
     price: "$0",
-    cadence: "forever",
-    description: "Try Snoodlr on your site with no commitment.",
+    cadence: "to start",
+    description: "Try Snoodlr on your website and learn what customers ask before choosing a paid plan.",
     cta: "Start free",
     href: APP_LOGIN_URL,
     featured: false,
-    features: ["1 AI assistant", "Up to 100 conversations / month", "Website widget", "Basic lead capture", "Email notifications"]
+    features: ["Website assistant", "Approved business sources", "Basic lead capture", "Conversations in the portal", "Team-assisted upgrade path"]
   },
   {
-    name: "Essential",
-    price: "$15",
-    cadence: "/ month",
-    description: "For small businesses ready to grow.",
-    cta: "Start Essential",
-    href: APP_LOGIN_URL,
+    name: "Growth",
+    price: "Paid",
+    cadence: "as you grow",
+    description: "For businesses that need more usage, properties, channels, and controls.",
+    cta: "Talk to us",
+    href: "/contact",
     featured: true,
-    features: ["1 AI assistant", "Up to 2,000 conversations / month", "Website widget + WordPress plugin", "Advanced lead capture & routing", "Custom business tone", "Priority email support"]
+    features: ["Higher conversation usage", "More properties or assistants", "Advanced lead capture", "Supported channels as enabled", "WordPress plugin availability"]
   },
   {
     name: "Business",
-    price: "$50",
-    cadence: "/ month",
-    description: "For teams that need scale and control.",
-    cta: "Start Business",
-    href: APP_LOGIN_URL,
+    price: "Contact us",
+    cadence: "",
+    description: "For teams that need rollout support, review workflows, and broader channel needs.",
+    cta: "Contact us",
+    href: "/contact",
     featured: false,
-    features: ["3 AI assistants", "Unlimited conversations", "Website widget + WordPress + API", "Advanced lead capture & CRM sync", "Custom business tone & flows", "Team collaboration & handoffs", "Priority support", "Analytics dashboard"]
+    features: ["Multiple properties", "Team handoff workflows", "WooCommerce support through the plugin", "Usage and access controls", "Analytics and conversation review"]
   },
   {
     name: "Enterprise",
     price: "Custom",
     cadence: "",
-    description: "Dedicated setup, SLAs, and custom work.",
-    cta: "Call sales",
+    description: "For larger organizations with custom limits, onboarding, or integration requirements.",
+    cta: "Contact us",
     href: "/contact",
     featured: false,
-    features: ["Unlimited AI assistants", "Unlimited conversations", "All integrations + custom builds", "Dedicated account manager", "SSO & advanced security", "Custom AI training on your data", "SLA guarantee", "White-glove onboarding"]
+    features: ["Custom usage and property limits", "Rollout planning", "Channel requirements review", "Priority support options", "Security and procurement discussion"]
   }
 ];
 
 const rows = [
-  ["Conversations", "100/mo", "2,000/mo", "Unlimited", "Unlimited"],
-  ["AI assistants", "1", "1", "3", "Unlimited"],
   ["Website widget", true, true, true, true],
-  ["WordPress plugin", false, true, true, true],
-  ["API access", false, false, true, true],
-  ["Custom tone & flows", false, true, true, true],
-  ["CRM / handoffs", false, false, true, true],
-  ["Analytics dashboard", false, false, true, true],
-  ["Priority support", false, true, true, true],
-  ["Dedicated account manager", false, false, false, true],
-  ["SSO & advanced security", false, false, false, true],
-  ["Custom AI training", false, false, false, true],
-  ["SLA guarantee", false, false, false, true]
+  ["Approved website, docs, and policies", true, true, true, true],
+  ["Lead capture", "Basic", "Advanced", "Advanced", "Custom"],
+  ["Conversations and leads portal", true, true, true, true],
+  ["Higher usage limits", false, true, true, true],
+  ["More properties or assistants", false, true, true, true],
+  ["Supported channels beyond website", false, "As enabled", "As enabled", "As enabled"],
+  ["WordPress plugin", false, "Available", "Available", "Available"],
+  ["WooCommerce store support", false, "With plugin", "With plugin", "With plugin"],
+  ["Advanced controls", false, true, true, true],
+  ["Rollout support", false, false, true, true],
+  ["Custom limits or requirements", false, false, "Discuss", "Custom"]
 ];
 
 const jsonLd = [
@@ -75,8 +74,7 @@ const jsonLd = [
     offers: plans.map((plan) => ({
       "@type": "Offer",
       name: plan.name,
-      price: plan.price.startsWith("$") ? plan.price.replace("$", "") : "0",
-      priceCurrency: "USD"
+      ...(plan.price === "$0" ? { price: "0", priceCurrency: "USD" } : {})
     }))
   }
 ];
@@ -84,9 +82,9 @@ const jsonLd = [
 
 <BaseLayout
   title="Pricing - Snoodlr AI business assistant"
-  description="Simple, transparent pricing for Snoodlr. Start free, then scale with Essential or Business plans. Enterprise? Let's talk."
+  description="Start Snoodlr for free, then talk with our team about paid plans for higher usage, more properties, more channels, and advanced controls."
   ogTitle="Pricing - Snoodlr"
-  ogDescription="Simple pricing for your AI business assistant. Free, Essential, Business, and Enterprise plans."
+  ogDescription="Free to start, with paid Snoodlr plans for higher usage, more properties, more channels, and advanced controls."
   path="/pricing"
   jsonLd={jsonLd}
 >
@@ -98,7 +96,7 @@ const jsonLd = [
         <div class="mx-auto max-w-3xl text-center">
           <Eyebrow label="Pricing" />
           <h1 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Simple pricing. Serious outcomes.</h1>
-          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Start free and upgrade when you're ready. No hidden fees, no annual lock-in.</p>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Start free on your website. Paid plans are available for higher usage, more properties, more channels, and advanced controls.</p>
         </div>
 
         <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -126,7 +124,7 @@ const jsonLd = [
           ))}
         </div>
 
-        <p class="mt-8 text-center text-sm text-muted-foreground">All paid plans include a 14-day free trial. No credit card required to start. Cancel anytime.</p>
+        <p class="mt-8 text-center text-sm text-muted-foreground">Paid plan activation and billing are handled with our team today, so Business and Enterprise pricing can match your rollout.</p>
       </div>
     </section>
 
@@ -135,7 +133,7 @@ const jsonLd = [
         <div class="max-w-3xl">
           <Eyebrow label="Compare" />
           <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">What's included</h2>
-          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Every plan gives you the core Snoodlr experience. Upgrade for more volume, assistants, and control.</p>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Every plan starts with the core Snoodlr experience. Upgrade when you need more volume, properties, supported channels, and control.</p>
         </div>
 
         <div class="mt-12 overflow-x-auto">
