@@ -1,8 +1,12 @@
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import type { SiteLang } from "../lib/links";
 
-export default function ThemeToggle() {
+export default function ThemeToggle({ lang = "en" }: { lang?: SiteLang }) {
   const [dark, setDark] = useState(true);
+  const label = dark
+    ? lang === "ar" ? "التبديل إلى الوضع الفاتح" : "Switch to light mode"
+    : lang === "ar" ? "التبديل إلى الوضع الداكن" : "Switch to dark mode";
 
   useEffect(() => {
     const stored = window.localStorage.getItem("theme");
@@ -23,7 +27,7 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
-      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={label}
       className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-surface/60 text-foreground transition-colors hover:bg-accent"
       onClick={toggleTheme}
     >

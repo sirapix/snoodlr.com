@@ -9,11 +9,9 @@ const isArabic = siteLang === "ar";
 const loginUrl = appLoginUrl(siteLang);
 const homePath = localizedPath(siteLang, "/");
 const pricingPath = localizedPath(siteLang, "/pricing");
-const contactPath = localizedPath(siteLang, "/contact");
 const howPath = `${homePath}#how-it-works`;
 const casesPath = `${homePath}#use-cases`;
 const isPricing = currentPath.endsWith("/pricing");
-const isContact = currentPath.endsWith("/contact");
 const labels = isArabic
   ? {
       home: "الصفحة الرئيسية",
@@ -21,9 +19,12 @@ const labels = isArabic
       cases: "الاستخدامات",
       pricing: "الأسعار",
       contact: "تواصل معنا",
+      openChat: "افتح محادثة سنودلر",
       start: "ابدأ مجانًا",
       switch: "English",
-      switchShort: "EN"
+      menu: "فتح القائمة",
+      closeMenu: "إغلاق القائمة",
+      appearance: "المظهر"
     }
   : {
       home: "Snoodlr home",
@@ -31,35 +32,187 @@ const labels = isArabic
       cases: "Use cases",
       pricing: "Pricing",
       contact: "Contact",
+      openChat: "Open Snoodlr chat",
       start: "Start free",
       switch: "العربية",
-      switchShort: "ع"
+      menu: "Open menu",
+      closeMenu: "Close menu",
+      appearance: "Appearance"
     };
 const navLink = "text-sm text-muted-foreground transition-colors hover:text-foreground";
 const activeLink = "text-sm text-foreground";
-const shortSwitchClass = isArabic ? "translate-y-[2px]" : "-translate-y-[2px]";
+const mobileLink = "block w-full rounded-xl px-4 py-3 text-start text-base font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground";
 ---
 
-<header class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
+<header data-site-header class="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
   <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
     <a aria-label={labels.home} href={homePath} class="flex items-center gap-2">
-        <img src="/assets/snoodlr-logo.svg" alt="Snoodlr" class="h-[45px] w-auto dark:brightness-0 dark:invert" />
+      <img src="/assets/snoodlr-logo.svg" alt="Snoodlr" class="h-[45px] w-auto dark:brightness-0 dark:invert" />
     </a>
 
     <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
       <a href={howPath} class={navLink}>{labels.how}</a>
       <a href={casesPath} class={navLink}>{labels.cases}</a>
       <a href={pricingPath} class={isPricing ? activeLink : navLink} aria-current={isPricing ? "page" : undefined}>{labels.pricing}</a>
-      <a href={contactPath} class={isContact ? activeLink : navLink} aria-current={isContact ? "page" : undefined}>{labels.contact}</a>
+      <span class="inline-flex items-center gap-1">
+        <button type="button" data-snoodlr-open-chat class={navLink}>{labels.contact}</button>
+        <button
+          type="button"
+          data-snoodlr-open-chat
+          aria-label={labels.openChat}
+          class="inline-flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        >
+          <img src="/assets/arrow-down-right-svgrepo-com.svg" alt="" aria-hidden="true" class="h-4 w-4 opacity-70 dark:invert" />
+        </button>
+      </span>
     </nav>
 
-    <div class="flex items-center gap-3">
-      <a href={languageSwitchPath(siteLang, currentPath)} aria-label={labels.switch} class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-surface/60 text-sm font-semibold leading-none text-foreground transition-colors hover:bg-accent sm:w-auto sm:px-3 sm:font-medium">
-        <span class={`block sm:hidden ${shortSwitchClass}`}>{labels.switchShort}</span>
-        <span class="hidden sm:inline">{labels.switch}</span>
+    <div class="hidden items-center gap-3 md:flex">
+      <a href={languageSwitchPath(siteLang, currentPath)} aria-label={labels.switch} class="inline-flex h-10 items-center justify-center rounded-full border border-border/60 bg-surface/60 px-3 text-sm font-medium leading-none text-foreground transition-colors hover:bg-accent">
+        {labels.switch}
       </a>
-      <ThemeToggle client:load />
+      <ThemeToggle client:load lang={siteLang} />
       <ButtonLink href={loginUrl} size="md" lang={siteLang}>{labels.start}</ButtonLink>
+    </div>
+
+    <button
+      type="button"
+      data-mobile-menu-trigger
+      aria-expanded="false"
+      aria-controls="site-mobile-menu"
+      aria-label={labels.menu}
+      data-open-label={labels.menu}
+      data-close-label={labels.closeMenu}
+      class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-surface/60 text-foreground transition-colors hover:bg-accent md:hidden"
+    >
+      <svg data-menu-open-icon aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-5 w-5">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+      <svg data-menu-close-icon aria-hidden="true" viewBox="0 0 24 24" fill="none" class="hidden h-5 w-5">
+        <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="site-mobile-menu" data-mobile-menu hidden class="border-t border-border/60 bg-background/95 shadow-soft backdrop-blur-xl md:hidden">
+    <div class="mx-auto max-w-7xl px-6 py-5">
+      <nav class="flex flex-col gap-1" aria-label="Mobile primary">
+        <a href={howPath} class={mobileLink}>{labels.how}</a>
+        <a href={casesPath} class={mobileLink}>{labels.cases}</a>
+        <a href={pricingPath} class={isPricing ? `${mobileLink} bg-accent text-foreground` : mobileLink} aria-current={isPricing ? "page" : undefined}>{labels.pricing}</a>
+        <div class="flex items-center gap-1">
+          <button type="button" data-snoodlr-open-chat class={`${mobileLink} flex-1`}>{labels.contact}</button>
+          <button
+            type="button"
+            data-snoodlr-open-chat
+            aria-label={labels.openChat}
+            class="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          >
+            <img src="/assets/arrow-down-right-svgrepo-com.svg" alt="" aria-hidden="true" class="h-5 w-5 opacity-70 dark:invert" />
+          </button>
+        </div>
+      </nav>
+
+      <div class="mt-5 grid gap-3 border-t border-border/60 pt-5">
+        <a href={languageSwitchPath(siteLang, currentPath)} aria-label={labels.switch} class="inline-flex h-11 items-center justify-center rounded-full border border-border/60 bg-surface/60 px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent">
+          {labels.switch}
+        </a>
+        <div class="flex items-center justify-between rounded-2xl border border-border/60 bg-surface/40 px-4 py-2">
+          <span class="text-sm font-medium text-muted-foreground">{labels.appearance}</span>
+          <ThemeToggle client:load lang={siteLang} />
+        </div>
+        <ButtonLink href={loginUrl} size="md" lang={siteLang} block>{labels.start}</ButtonLink>
+      </div>
     </div>
   </div>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("[data-site-header]");
+
+  if (header) {
+    const menuTrigger = header.querySelector<HTMLButtonElement>("[data-mobile-menu-trigger]");
+    const mobileMenu = header.querySelector<HTMLElement>("[data-mobile-menu]");
+    const openIcon = header.querySelector<SVGElement>("[data-menu-open-icon]");
+    const closeIcon = header.querySelector<SVGElement>("[data-menu-close-icon]");
+
+    const setMenuOpen = (open: boolean) => {
+      if (!menuTrigger || !mobileMenu) return;
+
+      menuTrigger.setAttribute("aria-expanded", String(open));
+      menuTrigger.setAttribute("aria-label", open ? menuTrigger.dataset.closeLabel ?? "Close menu" : menuTrigger.dataset.openLabel ?? "Open menu");
+      mobileMenu.hidden = !open;
+      openIcon?.classList.toggle("hidden", open);
+      closeIcon?.classList.toggle("hidden", !open);
+    };
+
+    menuTrigger?.addEventListener("click", () => {
+      setMenuOpen(menuTrigger.getAttribute("aria-expanded") !== "true");
+    });
+
+    header.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element) || target.closest("[data-mobile-menu-trigger]")) return;
+      if (target.closest("[data-mobile-menu] a, [data-snoodlr-open-chat]")) setMenuOpen(false);
+    });
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (target instanceof Element && !header.contains(target)) setMenuOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || menuTrigger?.getAttribute("aria-expanded") !== "true") return;
+      setMenuOpen(false);
+      menuTrigger?.focus();
+    });
+
+    window.matchMedia("(min-width: 768px)").addEventListener("change", (event) => {
+      if (event.matches) setMenuOpen(false);
+    });
+  }
+
+  let chatOpenRetry: number | undefined;
+
+  const findAndOpenChat = () => {
+    const widgetContainer = document.querySelector<HTMLElement>("[data-snoodlr-widget]");
+    if (!widgetContainer) return false;
+
+    const widgetRoot = widgetContainer.shadowRoot ?? widgetContainer;
+    const launcher = widgetRoot.querySelector<HTMLButtonElement>('button[aria-label="Open snoodlr chat"]');
+    if (launcher) {
+      launcher.click();
+      return true;
+    }
+
+    const messageInput = widgetRoot.querySelector<HTMLTextAreaElement>("textarea");
+    if (messageInput) {
+      messageInput.focus();
+      return true;
+    }
+
+    return false;
+  };
+
+  const openChat = () => {
+    if (chatOpenRetry !== undefined) window.clearTimeout(chatOpenRetry);
+    if (findAndOpenChat()) return;
+
+    const deadline = Date.now() + 5000;
+    const retry = () => {
+      if (findAndOpenChat() || Date.now() >= deadline) {
+        chatOpenRetry = undefined;
+        return;
+      }
+      chatOpenRetry = window.setTimeout(retry, 100);
+    };
+    retry();
+  };
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element) || !target.closest("[data-snoodlr-open-chat]")) return;
+    event.preventDefault();
+    openChat();
+  });
+</script>
