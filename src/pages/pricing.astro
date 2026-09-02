@@ -1,49 +1,53 @@
 ---
 import BaseLayout from "../components/BaseLayout.astro";
-import ButtonLink from "../components/ButtonLink.astro";
+import Button from "../components/Button.astro";
 import CheckIcon from "../components/CheckIcon.astro";
 import CtaBand from "../components/CtaBand.astro";
 import Eyebrow from "../components/Eyebrow.astro";
-import { APP_LOGIN_URL } from "../lib/links";
+import { monthlyPriceLabel, PLAN_PRICES_USD } from "../lib/pricing";
 
 const plans = [
   {
+    key: "free",
     name: "Free start",
     price: "$0",
     cadence: "to start",
+    monthlyPriceUsd: 0,
     description: "Try Snoodlr on your website and learn what customers ask before choosing a paid plan.",
     cta: "Start free",
-    href: APP_LOGIN_URL,
     featured: false,
     features: ["Website assistant", "Approved business sources", "Basic lead capture", "Conversations in the portal", "Team-assisted upgrade path"]
   },
   {
-    name: "Growth",
-    price: "Paid",
-    cadence: "as you grow",
+    key: "essential",
+    name: "Essential",
+    price: monthlyPriceLabel("essential"),
+    cadence: "/ month",
+    monthlyPriceUsd: PLAN_PRICES_USD.essential,
     description: "For businesses that need more usage, properties, channels, and controls.",
     cta: "Talk to us",
-    href: "/contact",
     featured: true,
     features: ["Higher conversation usage", "More properties or assistants", "Advanced lead capture", "Unified inbox for supported channels", "Social messages and comments as enabled", "WordPress plugin availability"]
   },
   {
+    key: "business",
     name: "Business",
-    price: "Contact us",
-    cadence: "",
+    price: monthlyPriceLabel("business"),
+    cadence: "/ month",
+    monthlyPriceUsd: PLAN_PRICES_USD.business,
     description: "For teams that need rollout support, review workflows, and broader channel needs.",
     cta: "Contact us",
-    href: "/contact",
     featured: false,
     features: ["Multiple properties", "Team handoff workflows", "WooCommerce support through the plugin", "Usage and access controls", "Analytics, comments, and conversation review"]
   },
   {
+    key: "enterprise",
     name: "Enterprise",
     price: "Custom",
     cadence: "",
+    monthlyPriceUsd: null,
     description: "For larger organizations with custom limits, onboarding, or integration requirements.",
     cta: "Contact us",
-    href: "/contact",
     featured: false,
     features: ["Custom usage and property limits", "Rollout planning", "Channel requirements review", "Priority support options", "Security and procurement discussion"]
   }
@@ -83,7 +87,22 @@ const jsonLd = [
     offers: plans.map((plan) => ({
       "@type": "Offer",
       name: plan.name,
-      ...(plan.price === "$0" ? { price: "0", priceCurrency: "USD" } : {})
+      ...(plan.monthlyPriceUsd !== null
+        ? {
+            price: String(plan.monthlyPriceUsd),
+            priceCurrency: "USD",
+            ...(plan.key !== "free"
+              ? {
+                  priceSpecification: {
+                    "@type": "UnitPriceSpecification",
+                    price: String(plan.monthlyPriceUsd),
+                    priceCurrency: "USD",
+                    billingDuration: "P1M"
+                  }
+                }
+              : {})
+          }
+        : { description: "Custom monthly pricing" })
     }))
   }
 ];
@@ -91,9 +110,9 @@ const jsonLd = [
 
 <BaseLayout
   title="Pricing - Snoodlr AI business assistant"
-  description="Start Snoodlr for free, then talk with our team about paid plans for a unified inbox, higher usage, more properties, more channels, and advanced controls."
+  description="Start Snoodlr for free, then choose Essential at $30 per month or Business at $85 per month. Paid plans are billed monthly; annual billing is not available yet."
   ogTitle="Pricing - Snoodlr"
-  ogDescription="Free to start, with paid Snoodlr plans for unified inbox capabilities, higher usage, more properties, more channels, and advanced controls."
+  ogDescription="Free to start. Essential is $30 per month and Business is $85 per month. Paid plans are billed monthly; annual billing is not available yet."
   path="/pricing"
   keywords={[
     "Snoodlr pricing",
@@ -112,7 +131,7 @@ const jsonLd = [
         <div class="mx-auto max-w-3xl text-center">
           <Eyebrow label="Pricing" />
           <h1 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Simple pricing. Serious outcomes.</h1>
-          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Start free on your website. Paid plans are available for higher usage, more properties, more channels, and advanced controls.</p>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Start free on your website, then choose the monthly plan that fits your next stage. Annual billing is not available yet.</p>
         </div>
 
         <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -135,12 +154,23 @@ const jsonLd = [
                   ))}
                 </ul>
               </div>
-              <ButtonLink href={plan.href} size="card" variant={plan.featured ? "primary" : "secondary"} block class="mt-7">{plan.cta}</ButtonLink>
+              <Button
+                type="button"
+                data-snoodlr-open-chat
+                data-plan-chat={plan.key}
+                aria-label={`Open chat about the ${plan.name} plan`}
+                size="card"
+                variant={plan.featured ? "primary" : "secondary"}
+                block
+                class="mt-7"
+              >
+                {plan.cta}
+              </Button>
             </div>
           ))}
         </div>
 
-        <p class="mt-8 text-center text-sm text-muted-foreground">Paid plan activation and billing are handled with our team today, so Business and Enterprise pricing can match your rollout.</p>
+        <p class="mt-8 text-center text-sm text-muted-foreground">Paid plans use monthly billing today. Annual billing is not available yet, and activation is handled with our team.</p>
       </div>
     </section>
 

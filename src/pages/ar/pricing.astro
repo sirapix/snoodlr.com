@@ -1,51 +1,53 @@
 ---
 import BaseLayout from "../../components/BaseLayout.astro";
-import ButtonLink from "../../components/ButtonLink.astro";
+import Button from "../../components/Button.astro";
 import CheckIcon from "../../components/CheckIcon.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import Eyebrow from "../../components/Eyebrow.astro";
-import { appLoginUrl } from "../../lib/links";
-
-const appLoginHref = appLoginUrl("ar");
+import { monthlyPriceLabel, PLAN_PRICES_USD } from "../../lib/pricing";
 
 const plans = [
   {
+    key: "free",
     name: "البدء المجاني",
     price: "$0",
     cadence: "للبدء",
+    monthlyPriceUsd: 0,
     description: "جرّب Snoodlr على موقعك واعرف ما يسأل عنه العملاء قبل اختيار خطة مدفوعة.",
     cta: "ابدأ مجانًا",
-    href: appLoginHref,
     featured: false,
     features: ["مساعد للموقع", "مصادر نشاط معتمدة", "جمع عملاء أساسي", "محادثات داخل البوابة", "ترقية بمساعدة الفريق"]
   },
   {
-    name: "النمو",
-    price: "مدفوعة",
-    cadence: "مع نموك",
+    key: "essential",
+    name: "الأساسية",
+    price: monthlyPriceLabel("essential"),
+    cadence: "/ شهر",
+    monthlyPriceUsd: PLAN_PRICES_USD.essential,
     description: "للأنشطة التي تحتاج إلى استخدام أعلى، ومواقع أو فروع أكثر، وقنوات وتحكم أكبر.",
     cta: "تواصل معنا",
-    href: "/ar/contact",
     featured: true,
     features: ["استخدام محادثات أعلى", "مواقع أو مساعدين أكثر", "جمع عملاء متقدم", "صندوق وارد موحد للقنوات المدعومة", "رسائل وتعليقات التواصل عند تفعيلها", "توفر إضافة ووردبريس"]
   },
   {
+    key: "business",
     name: "الأعمال",
-    price: "تواصل معنا",
-    cadence: "",
+    price: monthlyPriceLabel("business"),
+    cadence: "/ شهر",
+    monthlyPriceUsd: PLAN_PRICES_USD.business,
     description: "للفرق التي تحتاج إلى دعم إطلاق، ومراجعة محادثات، واحتياجات قنوات أوسع.",
     cta: "تواصل معنا",
-    href: "/ar/contact",
     featured: false,
     features: ["عدة مواقع أو فروع", "تحويلات عمل للفريق", "دعم WooCommerce عبر الإضافة", "تحكم في الاستخدام والصلاحيات", "تحليلات ومراجعة التعليقات والمحادثات"]
   },
   {
+    key: "enterprise",
     name: "المؤسسات",
     price: "مخصص",
     cadence: "",
+    monthlyPriceUsd: null,
     description: "للمؤسسات الأكبر التي تحتاج إلى حدود مخصصة أو تأهيل أو متطلبات تكامل خاصة.",
     cta: "تواصل مع المبيعات",
-    href: "/ar/contact",
     featured: false,
     features: ["حدود استخدام ومواقع مخصصة", "تخطيط الإطلاق", "مراجعة متطلبات القنوات", "خيارات دعم بأولوية", "نقاش أمني وشرائي"]
   }
@@ -85,7 +87,22 @@ const jsonLd = {
   offers: plans.map((plan) => ({
     "@type": "Offer",
     name: plan.name,
-    ...(plan.price === "$0" ? { price: "0", priceCurrency: "USD" } : {})
+    ...(plan.monthlyPriceUsd !== null
+      ? {
+          price: String(plan.monthlyPriceUsd),
+          priceCurrency: "USD",
+          ...(plan.key !== "free"
+            ? {
+                priceSpecification: {
+                  "@type": "UnitPriceSpecification",
+                  price: String(plan.monthlyPriceUsd),
+                  priceCurrency: "USD",
+                  billingDuration: "P1M"
+                }
+              }
+            : {})
+        }
+      : { description: "تسعير شهري مخصص" })
   }))
 };
 ---
@@ -93,9 +110,9 @@ const jsonLd = {
 <BaseLayout
   lang="ar"
   title="الأسعار - Snoodlr مساعد أعمال بالذكاء الاصطناعي"
-  description="ابدأ Snoodlr مجانًا، ثم تواصل مع فريقنا حول الخطط المدفوعة لصندوق وارد موحد واستخدام أعلى ومواقع أكثر وقنوات إضافية وتحكم متقدم."
+  description="ابدأ Snoodlr مجانًا، ثم اختر الخطة الأساسية بسعر 30 دولارًا شهريًا أو خطة الأعمال بسعر 85 دولارًا شهريًا. الفوترة سنوية غير متاحة بعد."
   ogTitle="الأسعار - Snoodlr"
-  ogDescription="Snoodlr مجاني للبدء، مع خطط مدفوعة لصندوق وارد موحد واستخدام أعلى ومواقع أكثر وقنوات إضافية وتحكم متقدم."
+  ogDescription="ابدأ مجانًا. الخطة الأساسية بسعر 30 دولارًا شهريًا وخطة الأعمال بسعر 85 دولارًا شهريًا. الفوترة السنوية غير متاحة بعد."
   path="/ar/pricing"
   keywords={[
     "أسعار Snoodlr",
@@ -114,7 +131,7 @@ const jsonLd = {
         <div class="mx-auto max-w-3xl text-center">
           <Eyebrow label="الأسعار" />
           <h1 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">أسعار بسيطة. نتائج جدية.</h1>
-          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">ابدأ مجانًا على موقعك. الخطط المدفوعة متاحة لاستخدام أعلى، ومواقع أكثر، وقنوات إضافية، وتحكم متقدم.</p>
+          <p class="mt-5 text-lg leading-relaxed text-muted-foreground">ابدأ مجانًا على موقعك، ثم اختر الخطة الشهرية التي تناسب مرحلتك التالية. الفوترة السنوية غير متاحة بعد.</p>
         </div>
 
         <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -137,12 +154,24 @@ const jsonLd = {
                   ))}
                 </ul>
               </div>
-              <ButtonLink href={plan.href} size="card" variant={plan.featured ? "primary" : "secondary"} lang="ar" block class="mt-7">{plan.cta}</ButtonLink>
+              <Button
+                type="button"
+                data-snoodlr-open-chat
+                data-plan-chat={plan.key}
+                aria-label={`افتح المحادثة حول خطة ${plan.name}`}
+                size="card"
+                variant={plan.featured ? "primary" : "secondary"}
+                lang="ar"
+                block
+                class="mt-7"
+              >
+                {plan.cta}
+              </Button>
             </div>
           ))}
         </div>
 
-        <p class="mt-8 text-center text-sm text-muted-foreground">تفعيل الخطط المدفوعة والفوترة يتمان مع فريقنا حاليًا، حتى تناسب أسعار الأعمال والمؤسسات خطة الإطلاق.</p>
+        <p class="mt-8 text-center text-sm text-muted-foreground">تستخدم الخطط المدفوعة الفوترة الشهرية حاليًا. الفوترة السنوية غير متاحة بعد، ويتم التفعيل مع فريقنا.</p>
       </div>
     </section>
 

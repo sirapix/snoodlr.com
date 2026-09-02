@@ -9,6 +9,7 @@ import Eyebrow from "../components/Eyebrow.astro";
 import WordPressPluginBadge from "../components/WordPressPluginBadge.astro";
 import WordPressPluginSpotlight from "../components/WordPressPluginSpotlight.astro";
 import { APP_LOGIN_URL } from "../lib/links";
+import { monthlyPriceLabel } from "../lib/pricing";
 
 const outcomes = [
   ["Answer from approved business content", "Use your website, uploaded documents, store policies, and product data to reply with answers customers can trust."],
@@ -47,8 +48,9 @@ const businessPoints = [
 
 const pricingHighlights = [
   ["Free to start", "Launch on your website and see how Snoodlr handles real customer questions before choosing a paid plan."],
-  ["Paid plans as you grow", "Upgrade for higher usage, more properties, more channels, and advanced controls."],
-  ["Business or Enterprise", "Contact us for larger teams, rollout support, custom limits, and channel requirements."]
+  [`Essential — ${monthlyPriceLabel("essential")}/month`, "Upgrade for higher usage, more properties, more channels, and advanced controls."],
+  [`Business — ${monthlyPriceLabel("business")}/month`, "Add rollout support, review workflows, and broader channel needs."],
+  ["Enterprise — Custom", "Contact us for custom limits, onboarding, integration requirements, and priority support options."]
 ];
 
 const jsonLd = {
@@ -339,13 +341,13 @@ const jsonLd = {
           <div>
             <Eyebrow label="Pricing" />
             <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">Start free. Scale when the assistant is working.</h2>
-            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Snoodlr is free to start. Paid plans are available for higher usage, more properties, more channels, and advanced controls, with Business and Enterprise support handled with our team.</p>
+            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Snoodlr is free to start. Paid plans are billed monthly today—Essential is $30 per month and Business is $85 per month. Annual billing is not available yet.</p>
             <div class="mt-8 flex flex-wrap gap-3">
               <ButtonLink href={APP_LOGIN_URL}>Start free</ButtonLink>
               <ButtonLink href="/pricing" variant="secondary">See pricing</ButtonLink>
             </div>
           </div>
-          <div class="grid gap-4 md:grid-cols-3 lg:grid-cols-1">
+          <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
             {pricingHighlights.map(([title, description]) => (
               <div class="rounded-2xl border border-border/60 bg-card p-6">
                 <div class="flex items-start gap-3">

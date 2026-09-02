@@ -9,6 +9,7 @@ import Eyebrow from "../../components/Eyebrow.astro";
 import WordPressPluginBadge from "../../components/WordPressPluginBadge.astro";
 import WordPressPluginSpotlight from "../../components/WordPressPluginSpotlight.astro";
 import { appLoginUrl } from "../../lib/links";
+import { monthlyPriceLabel } from "../../lib/pricing";
 
 const appLoginHref = appLoginUrl("ar");
 
@@ -49,8 +50,9 @@ const businessPoints = [
 
 const pricingHighlights = [
   ["مجاني للبدء", "أطلق Snoodlr على موقعك وشاهد كيف يتعامل مع أسئلة العملاء الحقيقية قبل اختيار خطة مدفوعة."],
-  ["خطط مدفوعة مع النمو", "قم بالترقية لاستخدام أعلى، وعدد أكبر من المواقع أو الفروع، وقنوات أكثر، وتحكم متقدم."],
-  ["للأعمال والمؤسسات", "تواصل معنا للفرق الأكبر، ودعم الإطلاق، وحدود مخصصة، ومتطلبات القنوات."]
+  [`الأساسية — ${monthlyPriceLabel("essential")}/شهر`, "قم بالترقية لاستخدام أعلى، وعدد أكبر من المواقع أو الفروع، وقنوات أكثر، وتحكم متقدم."],
+  [`الأعمال — ${monthlyPriceLabel("business")}/شهر`, "أضف دعم الإطلاق، ومراجعة المحادثات، واحتياجات قنوات أوسع."],
+  ["المؤسسات — سعر مخصص", "تواصل معنا للحدود المخصصة، والتأهيل، ومتطلبات التكامل، وخيارات الدعم بأولوية."]
 ];
 
 const jsonLd = {
@@ -361,13 +363,13 @@ const jsonLd = {
           <div>
             <Eyebrow label="الأسعار" />
             <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">ابدأ مجانًا. توسع عندما يبدأ المساعد بتحقيق النتائج.</h2>
-            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Snoodlr مجاني للبدء. الخطط المدفوعة متاحة لاستخدام أعلى، ومواقع أو فروع أكثر، وقنوات إضافية، وتحكم متقدم، مع دعم الأعمال والمؤسسات من فريقنا.</p>
+            <p class="mt-5 text-lg leading-relaxed text-muted-foreground">Snoodlr مجاني للبدء. تُفوتر الخطط المدفوعة شهريًا حاليًا—الخطة الأساسية بسعر 30 دولارًا شهريًا وخطة الأعمال بسعر 85 دولارًا شهريًا. الفوترة السنوية غير متاحة بعد.</p>
             <div class="mt-8 flex flex-wrap gap-3">
               <ButtonLink href={appLoginHref} lang="ar">ابدأ مجانًا</ButtonLink>
               <ButtonLink href="/ar/pricing" variant="secondary" lang="ar">شاهد الأسعار</ButtonLink>
             </div>
           </div>
-          <div class="grid gap-4 md:grid-cols-3 lg:grid-cols-1">
+          <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-1">
             {pricingHighlights.map(([title, description]) => (
               <div class="rounded-2xl border border-border/60 bg-card p-6">
                 <div class="flex items-start gap-3">
