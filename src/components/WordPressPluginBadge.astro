@@ -1,0 +1,36 @@
+---
+import { WORDPRESS_PLUGIN_URL, type SiteLang } from "../lib/links";
+
+const { lang = "en" } = Astro.props as { lang?: SiteLang };
+const isArabic = lang === "ar";
+const labels = isArabic
+  ? {
+      official: "إضافة رسمية على WordPress.org",
+      support: "لووردبريس و WooCommerce",
+      aria: "شاهد إضافة Snoodlr الرسمية لووردبريس وWooCommerce على WordPress.org (يفتح في علامة تبويب جديدة)"
+    }
+  : {
+      official: "Official WordPress.org plugin",
+      support: "For WordPress + WooCommerce",
+      aria: "View the official Snoodlr plugin for WordPress and WooCommerce on WordPress.org (opens in a new tab)"
+    };
+---
+
+<a
+  data-wordpress-plugin-badge
+  href={WORDPRESS_PLUGIN_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={labels.aria}
+  class="group mx-auto mt-6 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-full border border-[#21759B]/35 bg-[#21759B]/10 px-3.5 py-2 text-sm shadow-soft transition-colors hover:border-[#21759B]/60 hover:bg-[#21759B]/15"
+>
+  <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#171717] ring-1 ring-white/15" aria-hidden="true">
+    <img src="/assets/wordpress-logo.svg" alt="" class="h-4 w-4" />
+  </span>
+  <span class="font-semibold text-foreground">{labels.official}</span>
+  <span class="hidden h-4 w-px bg-border-strong/70 sm:block" aria-hidden="true"></span>
+  <span class="text-muted-foreground">{labels.support}</span>
+  <svg class="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M5 11 11 5M6 5h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</a>

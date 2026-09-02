@@ -1,0 +1,133 @@
+---
+import ButtonLink from "./ButtonLink.astro";
+import CheckIcon from "./CheckIcon.astro";
+import Eyebrow from "./Eyebrow.astro";
+import { WORDPRESS_PLUGIN_URL, type SiteLang } from "../lib/links";
+
+const { lang = "en" } = Astro.props as { lang?: SiteLang };
+const isArabic = lang === "ar";
+const labels = isArabic
+  ? {
+      eyebrow: "إضافة رسمية على WordPress.org",
+      title: "ثبّت. فعّل. اربط Snoodlr.",
+      description: "ثبّت إضافة Snoodlr مباشرة من مستودع إضافات ووردبريس الرسمي. الإضافة نفسها تعمل مع مواقع ووردبريس وتفعّل إمكانات المتجر عندما يكون WooCommerce نشطًا، دون إضافة منفصلة للمتجر.",
+      cta: "شاهد الإضافة على WordPress.org",
+      ctaAria: "شاهد إضافة Snoodlr على WordPress.org (يفتح في علامة تبويب جديدة)",
+      benefits: [
+        "متاحة من مستودع ووردبريس الرسمي",
+        "تعمل مع ووردبريس سواء استخدمت WooCommerce أم لا",
+        "إعداد موجّه بالكامل من لوحة تحكم ووردبريس"
+      ],
+      pluginName: "Snoodlr AI Assistant",
+      pluginFor: "لووردبريس و WooCommerce",
+      directory: "المستودع الرسمي",
+      steps: [
+        ["ثبّت", "ابحث عن Snoodlr في إضافات ← أضف إضافة، أو افتح صفحتها على WordPress.org."],
+        ["فعّل", "فعّل الإضافة من لوحة ووردبريس. إذا كان WooCommerce نشطًا، تتعرّف عليه الإضافة تلقائيًا."],
+        ["اربط Snoodlr", "افتح إعداد Snoodlr، واختر مصادر المحتوى المعتمدة، ثم اربط مساعدك."]
+      ],
+      noCode: "لا حاجة لكتابة كود",
+      worksWithout: "وتعمل أيضًا دون WooCommerce"
+    }
+  : {
+      eyebrow: "Official WordPress.org plugin",
+      title: "Install. Activate. Connect Snoodlr.",
+      description: "Install Snoodlr directly from the official WordPress plugin directory. The same plugin works for WordPress sites and unlocks store capabilities when WooCommerce is active—no separate store add-on needed.",
+      cta: "View plugin on WordPress.org",
+      ctaAria: "View the Snoodlr plugin on WordPress.org (opens in a new tab)",
+      benefits: [
+        "Available from the official WordPress directory",
+        "Works with WordPress, with or without WooCommerce",
+        "Guided setup inside your WordPress dashboard"
+      ],
+      pluginName: "Snoodlr AI Assistant",
+      pluginFor: "For WordPress + WooCommerce",
+      directory: "Official directory",
+      steps: [
+        ["Install", "Find Snoodlr under Plugins → Add Plugin, or open its page on WordPress.org."],
+        ["Activate", "Activate it from your WordPress dashboard. If WooCommerce is active, the plugin detects it automatically."],
+        ["Connect Snoodlr", "Open Snoodlr setup, choose your approved content sources, and connect your assistant."]
+      ],
+      noCode: "No code required",
+      worksWithout: "Works without WooCommerce, too"
+    };
+---
+
+<section class="relative overflow-hidden border-y border-border/60 bg-surface/30 py-20 md:py-28" id="wordpress">
+  <div class="pointer-events-none absolute inset-0 bg-hero-glow opacity-35"></div>
+  <div class="relative mx-auto max-w-7xl px-6">
+    <div class="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div>
+        <Eyebrow label={labels.eyebrow} />
+        <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight md:text-5xl">{labels.title}</h2>
+        <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">{labels.description}</p>
+
+        <div class="mt-7 space-y-3">
+          {labels.benefits.map((benefit) => (
+            <div class="flex items-start gap-3 text-sm font-medium text-foreground">
+              <CheckIcon />
+              <span>{benefit}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-8">
+          <ButtonLink
+            href={WORDPRESS_PLUGIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={labels.ctaAria}
+            lang={lang}
+          >
+            <span class="inline-flex items-center gap-2">
+              {labels.cta}
+              <svg class="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M5 11 11 5M6 5h5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </ButtonLink>
+        </div>
+      </div>
+
+      <div class="rounded-3xl border border-border-strong/60 bg-background/90 p-4 shadow-frame backdrop-blur sm:p-6">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-border/60 pb-5">
+          <div class="flex min-w-0 items-center gap-3">
+            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-[#171717] shadow-soft ring-1 ring-white/15" aria-hidden="true">
+              <img src="/assets/wordpress-logo.svg" alt="" class="h-7 w-7" />
+            </span>
+            <div class="min-w-0">
+              <h3 class="truncate font-semibold tracking-tight">{labels.pluginName}</h3>
+              <p class="mt-0.5 text-sm text-muted-foreground">{labels.pluginFor}</p>
+            </div>
+          </div>
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-[#21759B]/30 bg-[#21759B]/10 px-3 py-1 text-xs font-semibold text-[#21759B] dark:text-[#7dd3fc]">
+            <span class="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true"></span>
+            {labels.directory}
+          </span>
+        </div>
+
+        <ol class="relative mt-6 space-y-3">
+          {labels.steps.map(([title, description], index) => (
+            <li class="relative flex gap-4 rounded-2xl border border-border/60 bg-card p-4 sm:p-5">
+              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary/15 text-sm font-semibold text-primary ring-1 ring-primary/30">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div>
+                <h4 class="font-semibold tracking-tight">{title}</h4>
+                <p class="mt-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-2 rounded-2xl bg-primary/10 px-4 py-3 text-sm">
+          <span class="inline-flex items-center gap-2 font-semibold text-primary">
+            <span class="h-2 w-2 rounded-full bg-primary" aria-hidden="true"></span>
+            {labels.noCode}
+          </span>
+          <span class="text-muted-foreground">{labels.worksWithout}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

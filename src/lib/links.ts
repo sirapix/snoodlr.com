@@ -1,5 +1,6 @@
 export const APP_LOGIN_URL = "https://app.snoodlr.com/en/login";
 export const AR_APP_LOGIN_URL = "https://app.snoodlr.com/ar/login";
+export const WORDPRESS_PLUGIN_URL = "https://wordpress.org/plugins/snoodlr-ai-assistant-for-woocommerce/";
 
 export type SiteLang = "en" | "ar";
 
