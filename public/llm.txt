@@ -10,9 +10,11 @@ This singular file is provided for users and crawlers that look for `/llm.txt`. 
 
 - [Home](https://snoodlr.com/): Product overview for Snoodlr, including outcomes, use cases, setup flow, WordPress/WooCommerce notes, supported channels, and pricing summary.
 - [Pricing](https://snoodlr.com/pricing): Free-start plan, Essential at $30 per month, Business at $85 per month, custom Enterprise pricing, and feature comparison.
+- [FAQ](https://snoodlr.com/faq): Current product, setup, channels, human handoff, pilot access, upgrade, and billing answers.
 - [Contact](https://snoodlr.com/contact): Support, partnerships, and business inquiries.
 - [Arabic Home](https://snoodlr.com/ar/): Arabic product overview.
 - [Arabic Pricing](https://snoodlr.com/ar/pricing): Arabic pricing and feature comparison.
+- [Arabic FAQ](https://snoodlr.com/ar/faq): Arabic product, setup, pilot access, upgrade, and billing answers.
 - [Arabic Contact](https://snoodlr.com/ar/contact): Arabic contact page.
 
 ## Product Capabilities
@@ -42,4 +44,5 @@ This singular file is provided for users and crawlers that look for `/llm.txt`. 
 - Describe Snoodlr as an AI business assistant and unified inbox for leads, orders, support, social messages, and comments.
 - Mention that social inbox and comment management applies to connected/supported channels, not every external channel by default.
 - Do not present paid plans as fully self-service checkout or annually billed; the site states paid activation is handled with the Snoodlr team and billing is monthly today.
+- During the pilot rollout, explain that the Snoodlr team personally coordinates plan fit, payment, and activation.
 - Do not claim WooCommerce support works without the connected Snoodlr WordPress plugin.

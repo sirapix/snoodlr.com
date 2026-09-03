@@ -1,0 +1,163 @@
+---
+import BaseLayout from "../components/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import FaqSections from "../components/FaqSections.astro";
+import { APP_LOGIN_URL } from "../lib/links";
+import { monthlyPriceLabel } from "../lib/pricing";
+
+const faqSections = [
+  {
+    id: "getting-started",
+    label: "Getting started",
+    title: "From first account to first conversation",
+    description: "The essentials for understanding Snoodlr and bringing your first assistant online.",
+    items: [
+      {
+        question: "What is Snoodlr?",
+        answer: "Snoodlr is an AI business assistant and unified inbox. It answers customer questions using the business sources you approve, captures lead and request details, and gives your team one place to review conversations and follow up."
+      },
+      {
+        question: "How do I get started?",
+        answer: "Create your account, then use the guided onboarding flow to add your first business property and its approved sources. Once the content is ready, you can enable the website assistant from your Snoodlr workspace."
+      },
+      {
+        question: "What information can Snoodlr use?",
+        answer: "You can connect website pages and add approved documents, policies, FAQs, and other business material. Connected WordPress and WooCommerce stores can also provide richer product and store context through the official plugin."
+      }
+    ]
+  },
+  {
+    id: "using-snoodlr",
+    label: "Using Snoodlr",
+    title: "Channels, control, and team collaboration",
+    description: "What the customer experience looks like, and how your team stays involved.",
+    items: [
+      {
+        question: "Where can customers talk to my assistant?",
+        answer: "The website widget is the core experience. WordPress and WooCommerce are supported through the Snoodlr plugin, while WhatsApp, Facebook/Messenger, and other connected channels are available when enabled for your account and plan."
+      },
+      {
+        question: "Can my team step into a conversation?",
+        answer: "Yes. Your team can review conversations in the unified inbox, see when a customer needs human attention, and send a manual reply when judgment, approval, or a personal touch is needed."
+      },
+      {
+        question: "Does Snoodlr support English and Arabic?",
+        answer: "Yes. Snoodlr provides English and Arabic experiences, and the website widget can be configured with either language as its default. The strongest answers come from approved business content in the language your customers use."
+      },
+      {
+        question: "What if the assistant does not have enough information?",
+        answer: "Snoodlr is designed around your approved sources and team visibility. Your team can review conversations, identify missing business information, update or re-index the relevant source, and step in personally when the request needs a human."
+      }
+    ]
+  },
+  {
+    id: "plans-and-billing",
+    label: "Plans and billing",
+    title: "A clear path from pilot to scale",
+    description: "Start at no cost, see Snoodlr in real conversations, and expand with our team when the time is right.",
+    items: [
+      {
+        question: "Can I try Snoodlr before choosing a paid plan?",
+        answer: "Yes. You are welcome to start free and experience Snoodlr during the pilot before deciding whether you need more usage, properties, channels, or controls."
+      },
+      {
+        question: "Which paid plans are available?",
+        answer: `Essential is ${monthlyPriceLabel("essential")} per month and Business is ${monthlyPriceLabel("business")} per month. Enterprise plans are tailored to larger rollouts, custom limits, and integration or procurement requirements.`
+      },
+      {
+        question: "How do I upgrade and pay for a plan?",
+        answer: "During our current pilot rollout, every paid upgrade is arranged personally by our team instead of sending you through an automated checkout. Open the Snoodlr chat and tell us which plan you are considering; we will confirm the right fit, share the payment steps, and coordinate activation with you. This concierge approach gives early customers a more considered onboarding experience while we complete the subscription rollout."
+      },
+      {
+        question: "Is annual billing available?",
+        answer: "Not yet. Paid plans are currently billed monthly. If you have a larger rollout or a specific procurement requirement, speak with our team about an Enterprise arrangement."
+      }
+    ]
+  }
+];
+
+const faqItems = faqSections.flatMap((section) => section.items);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://snoodlr.com/faq#faq-page",
+  url: "https://snoodlr.com/faq",
+  name: "Snoodlr frequently asked questions",
+  inLanguage: "en",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="Snoodlr FAQ - Product, setup, plans, and billing"
+  description="Answers to common Snoodlr questions about setup, approved business content, channels, human handoff, plans, pilot access, upgrades, and billing."
+  ogTitle="Snoodlr FAQ"
+  ogDescription="Clear answers about using Snoodlr, connecting your business, and upgrading during our pilot rollout."
+  path="/faq"
+  dateModified="2026-09-03"
+  keywords={[
+    "Snoodlr FAQ",
+    "Snoodlr setup",
+    "Snoodlr upgrade",
+    "Snoodlr billing",
+    "Snoodlr pilot"
+  ]}
+  jsonLd={jsonLd}
+>
+  <main class="relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-[48rem] bg-hero-glow"></div>
+
+    <section class="relative py-20 md:py-28">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(22rem,0.9fr)] lg:gap-20">
+        <div class="max-w-3xl">
+          <Eyebrow label="Frequently asked questions" />
+          <h1 class="mt-6 text-balance text-5xl font-semibold tracking-tight md:text-6xl">Answers, without the runaround.</h1>
+          <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">Understand how Snoodlr works today, what you can connect, and how our team supports you from the free pilot through a paid rollout.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <ButtonLink href="/pricing">Explore plans</ButtonLink>
+            <ButtonLink href={APP_LOGIN_URL} variant="secondary">Start free</ButtonLink>
+          </div>
+        </div>
+
+        <aside class="relative overflow-hidden rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/15 via-card to-card p-7 shadow-frame md:p-9">
+          <div class="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-primary/15 blur-3xl"></div>
+          <div class="relative">
+            <span class="inline-flex rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-primary">Pilot access</span>
+            <h2 class="mt-5 text-2xl font-semibold tracking-tight md:text-3xl">Upgrades, personally coordinated.</h2>
+            <p class="mt-3 leading-relaxed text-muted-foreground">You are welcome to put Snoodlr through real customer conversations at no cost. When you are ready to expand, our team will help select, arrange, and activate the right plan with you.</p>
+            <Button type="button" data-snoodlr-open-chat aria-label="Open chat to discuss a Snoodlr upgrade" size="md" class="mt-6">
+              Discuss an upgrade
+            </Button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="relative border-y border-border/60 bg-surface/30 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-6">
+        <FaqSections sections={faqSections} />
+      </div>
+    </section>
+
+    <section class="relative px-6 py-20 md:py-28">
+      <div class="mx-auto max-w-5xl rounded-3xl border border-border-strong/60 bg-card p-9 text-center shadow-frame md:p-14">
+        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-primary">Still curious?</p>
+        <h2 class="mt-4 text-balance text-3xl font-semibold tracking-tight md:text-4xl">Ask us about your business and rollout.</h2>
+        <p class="mx-auto mt-3 max-w-xl leading-relaxed text-muted-foreground">Our team can help with plan fit, supported channels, setup, or a more specific requirement.</p>
+        <div class="mt-7 flex flex-wrap justify-center gap-3">
+          <Button type="button" data-snoodlr-open-chat aria-label="Open Snoodlr chat">Open chat</Button>
+          <ButtonLink href="/contact" variant="secondary">Send a message</ButtonLink>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

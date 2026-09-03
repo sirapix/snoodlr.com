@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
-import { canonicalPath, localizedPath, SITE_URL, type SiteLang } from "../lib/links";
+import { canonicalPath, localizedPath, SITE_URL, type LocalizedPublicPath, type SiteLang } from "../lib/links";
 import {
   DEFAULT_KEYWORDS,
   getDefaultStructuredData,
@@ -21,14 +21,15 @@ const {
   ogDescription = description,
   jsonLd = [],
   keywords = [],
+  dateModified,
   noindex = false
 } = Astro.props;
 
 const siteLang = lang as SiteLang;
 const cleanPath = canonicalPath(path);
 const englishEquivalent = cleanPath === "/ar/" ? "/" : cleanPath.startsWith("/ar/") ? cleanPath.slice(3) : cleanPath;
-const alternateEn = localizedPath("en", englishEquivalent as "/" | "/pricing" | "/contact");
-const alternateAr = localizedPath("ar", englishEquivalent as "/" | "/pricing" | "/contact");
+const alternateEn = localizedPath("en", englishEquivalent as LocalizedPublicPath);
+const alternateAr = localizedPath("ar", englishEquivalent as LocalizedPublicPath);
 const canonical = new URL(cleanPath, SITE_URL).toString();
 const ogImage = new URL(OG_IMAGE_PATH, SITE_URL).toString();
 const pageKeywords = Array.from(new Set([...DEFAULT_KEYWORDS, ...(Array.isArray(keywords) ? keywords : [keywords])])).join(", ");
@@ -40,7 +41,8 @@ const defaultStructuredData = getDefaultStructuredData({
   title,
   description,
   lang: siteLang,
-  path: cleanPath
+  path: cleanPath,
+  dateModified
 });
 const structuredData = [...defaultStructuredData, ...(Array.isArray(jsonLd) ? jsonLd : [jsonLd])].filter(Boolean);
 ---

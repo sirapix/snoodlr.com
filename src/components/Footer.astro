@@ -5,7 +5,9 @@ const { currentPath = "/", lang = "en" } = Astro.props;
 const siteLang = lang as SiteLang;
 const isArabic = siteLang === "ar";
 const homePath = localizedPath(siteLang, "/");
+const faqPath = localizedPath(siteLang, "/faq");
 const contactPath = localizedPath(siteLang, "/contact");
+const isFaq = currentPath.endsWith("/faq");
 const isContact = currentPath.endsWith("/contact");
 const labels = isArabic
   ? {
@@ -13,6 +15,7 @@ const labels = isArabic
       how: "طريقة العمل",
       cases: "الاستخدامات",
       wordpress: "ووردبريس",
+      faq: "الأسئلة الشائعة",
       contact: "تواصل معنا",
       rights: "جميع الحقوق محفوظة.",
       description: "مساعد أعمال بالذكاء الاصطناعي للعملاء المحتملين والطلبات والدعم."
@@ -22,6 +25,7 @@ const labels = isArabic
       how: "How it works",
       cases: "Use cases",
       wordpress: "WordPress",
+      faq: "FAQ",
       contact: "Contact",
       rights: "All rights reserved.",
       description: "AI business assistant for leads, orders, and support."
@@ -41,6 +45,7 @@ const labels = isArabic
         <a href={`${homePath}#how-it-works`} class="hover:text-foreground">{labels.how}</a>
         <a href={`${homePath}#use-cases`} class="hover:text-foreground">{labels.cases}</a>
         <a href={`${homePath}#wordpress`} class="hover:text-foreground">{labels.wordpress}</a>
+        <a href={faqPath} class={isFaq ? "text-foreground" : "hover:text-foreground"} aria-current={isFaq ? "page" : undefined}>{labels.faq}</a>
         <a href={contactPath} class={isContact ? "text-foreground" : "hover:text-foreground"} aria-current={isContact ? "page" : undefined}>{labels.contact}</a>
       </nav>
     </div>

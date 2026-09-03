@@ -37,6 +37,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://snoodlr.com/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://snoodlr.com/faq" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://snoodlr.com/ar/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://snoodlr.com/faq" />
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://snoodlr.com/ar/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://snoodlr.com/faq" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://snoodlr.com/ar/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://snoodlr.com/faq" />
+    <lastmod>2026-09-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://snoodlr.com/contact</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://snoodlr.com/contact" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://snoodlr.com/ar/contact" />

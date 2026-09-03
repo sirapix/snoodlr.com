@@ -9,15 +9,18 @@ const isArabic = siteLang === "ar";
 const loginUrl = appLoginUrl(siteLang);
 const homePath = localizedPath(siteLang, "/");
 const pricingPath = localizedPath(siteLang, "/pricing");
+const faqPath = localizedPath(siteLang, "/faq");
 const howPath = `${homePath}#how-it-works`;
 const casesPath = `${homePath}#use-cases`;
 const isPricing = currentPath.endsWith("/pricing");
+const isFaq = currentPath.endsWith("/faq");
 const labels = isArabic
   ? {
       home: "الصفحة الرئيسية",
       how: "طريقة العمل",
       cases: "الاستخدامات",
       pricing: "الأسعار",
+      faq: "الأسئلة الشائعة",
       contact: "تواصل معنا",
       openChat: "افتح محادثة سنودلر",
       start: "ابدأ مجانًا",
@@ -31,6 +34,7 @@ const labels = isArabic
       how: "How it works",
       cases: "Use cases",
       pricing: "Pricing",
+      faq: "FAQ",
       contact: "Contact",
       openChat: "Open Snoodlr chat",
       start: "Start free",
@@ -50,10 +54,11 @@ const mobileLink = "block w-full rounded-xl px-4 py-3 text-start text-base font-
       <img src="/assets/snoodlr-logo.svg" alt="Snoodlr" class="h-[45px] w-auto dark:brightness-0 dark:invert" />
     </a>
 
-    <nav class="hidden items-center gap-8 md:flex" aria-label="Primary">
+    <nav class="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Primary">
       <a href={howPath} class={navLink}>{labels.how}</a>
       <a href={casesPath} class={navLink}>{labels.cases}</a>
       <a href={pricingPath} class={isPricing ? activeLink : navLink} aria-current={isPricing ? "page" : undefined}>{labels.pricing}</a>
+      <a href={faqPath} class={isFaq ? activeLink : navLink} aria-current={isFaq ? "page" : undefined}>{labels.faq}</a>
       <span class="inline-flex items-center gap-1">
         <button type="button" data-snoodlr-open-chat class={navLink}>{labels.contact}</button>
         <button
@@ -67,7 +72,7 @@ const mobileLink = "block w-full rounded-xl px-4 py-3 text-start text-base font-
       </span>
     </nav>
 
-    <div class="hidden items-center gap-3 md:flex">
+    <div class="hidden items-center gap-3 lg:flex">
       <a href={languageSwitchPath(siteLang, currentPath)} aria-label={labels.switch} class="inline-flex h-10 items-center justify-center rounded-full border border-border/60 bg-surface/60 px-3 text-sm font-medium leading-none text-foreground transition-colors hover:bg-accent">
         {labels.switch}
       </a>
@@ -83,7 +88,7 @@ const mobileLink = "block w-full rounded-xl px-4 py-3 text-start text-base font-
       aria-label={labels.menu}
       data-open-label={labels.menu}
       data-close-label={labels.closeMenu}
-      class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-surface/60 text-foreground transition-colors hover:bg-accent md:hidden"
+      class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/60 bg-surface/60 text-foreground transition-colors hover:bg-accent lg:hidden"
     >
       <svg data-menu-open-icon aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-5 w-5">
         <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
@@ -94,12 +99,13 @@ const mobileLink = "block w-full rounded-xl px-4 py-3 text-start text-base font-
     </button>
   </div>
 
-  <div id="site-mobile-menu" data-mobile-menu hidden class="border-t border-border/60 bg-background/95 shadow-soft backdrop-blur-xl md:hidden">
+  <div id="site-mobile-menu" data-mobile-menu hidden class="border-t border-border/60 bg-background/95 shadow-soft backdrop-blur-xl lg:hidden">
     <div class="mx-auto max-w-7xl px-6 py-5">
       <nav class="flex flex-col gap-1" aria-label="Mobile primary">
         <a href={howPath} class={mobileLink}>{labels.how}</a>
         <a href={casesPath} class={mobileLink}>{labels.cases}</a>
         <a href={pricingPath} class={isPricing ? `${mobileLink} bg-accent text-foreground` : mobileLink} aria-current={isPricing ? "page" : undefined}>{labels.pricing}</a>
+        <a href={faqPath} class={isFaq ? `${mobileLink} bg-accent text-foreground` : mobileLink} aria-current={isFaq ? "page" : undefined}>{labels.faq}</a>
         <div class="flex items-center gap-1">
           <button type="button" data-snoodlr-open-chat class={`${mobileLink} flex-1`}>{labels.contact}</button>
           <button
@@ -167,7 +173,7 @@ const mobileLink = "block w-full rounded-xl px-4 py-3 text-start text-base font-
       menuTrigger?.focus();
     });
 
-    window.matchMedia("(min-width: 768px)").addEventListener("change", (event) => {
+    window.matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
       if (event.matches) setMenuOpen(false);
     });
   }

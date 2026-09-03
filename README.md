@@ -10,7 +10,7 @@ npm run dev
 npm run build
 ```
 
-The public site includes English and Arabic home, pricing, and contact pages, plus static `sitemap.xml`, `robots.txt`, canonical URLs, Open Graph metadata, and JSON-LD structured data.
+The public site includes English and Arabic home, pricing, FAQ, and contact pages, plus static `sitemap.xml`, `robots.txt`, canonical URLs, Open Graph metadata, and JSON-LD structured data.
 
 ## Contact Relay
 

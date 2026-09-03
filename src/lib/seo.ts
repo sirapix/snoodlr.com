@@ -24,7 +24,7 @@ export const DEFAULT_KEYWORDS = [
   "Snoodlr"
 ];
 
-export const PUBLIC_PAGE_PATHS = ["/", "/pricing", "/contact", "/ar/", "/ar/pricing", "/ar/contact"] as const;
+export const PUBLIC_PAGE_PATHS = ["/", "/pricing", "/faq", "/contact", "/ar/", "/ar/pricing", "/ar/faq", "/ar/contact"] as const;
 
 type DefaultStructuredDataOptions = {
   canonical: string;
@@ -32,9 +32,10 @@ type DefaultStructuredDataOptions = {
   description: string;
   lang: SiteLang;
   path: string;
+  dateModified?: string;
 };
 
-export function getDefaultStructuredData({ canonical, title, description, lang, path }: DefaultStructuredDataOptions) {
+export function getDefaultStructuredData({ canonical, title, description, lang, path, dateModified = SITE_UPDATED }: DefaultStructuredDataOptions) {
   const logo = new URL("/assets/snoodlr-logo.png", SITE_URL).toString();
   const ogImage = new URL(OG_IMAGE_PATH, SITE_URL).toString();
   const homeUrl = new URL(lang === "ar" ? "/ar/" : "/", SITE_URL).toString();
@@ -81,7 +82,7 @@ export function getDefaultStructuredData({ canonical, title, description, lang, 
       name: title,
       description,
       inLanguage: lang,
-      dateModified: SITE_UPDATED,
+      dateModified,
       isPartOf: {
         "@id": `${SITE_URL}/#website`
       },

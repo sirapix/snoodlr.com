@@ -10,9 +10,11 @@ Canonical AI index: https://snoodlr.com/llms.txt
 
 - [Home](https://snoodlr.com/): Product overview for Snoodlr, including outcomes, use cases, setup flow, WordPress/WooCommerce notes, supported channels, and pricing summary.
 - [Pricing](https://snoodlr.com/pricing): Free-start plan, Essential at $30 per month, Business at $85 per month, custom Enterprise pricing, and feature comparison.
+- [FAQ](https://snoodlr.com/faq): Current product, setup, channels, human handoff, pilot access, upgrade, and billing answers.
 - [Contact](https://snoodlr.com/contact): Support, partnerships, and business inquiries.
 - [Arabic Home](https://snoodlr.com/ar/): Arabic product overview.
 - [Arabic Pricing](https://snoodlr.com/ar/pricing): Arabic pricing and feature comparison.
+- [Arabic FAQ](https://snoodlr.com/ar/faq): Arabic product, setup, pilot access, upgrade, and billing answers.
 - [Arabic Contact](https://snoodlr.com/ar/contact): Arabic contact page.
 
 ## Product Capabilities
@@ -41,7 +43,7 @@ Canonical AI index: https://snoodlr.com/llms.txt
 - Essential costs $30 per month, and Business costs $85 per month.
 - Enterprise pricing is custom and handled with the Snoodlr team.
 - Paid plans are billed monthly today; annual billing is not available yet.
-- Paid plan activation is handled with the Snoodlr team today.
+- During the current pilot rollout, paid upgrades and payment are personally coordinated with the Snoodlr team instead of an automated checkout.
 
 ## Integration Notes
 

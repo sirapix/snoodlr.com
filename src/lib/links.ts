@@ -3,6 +3,7 @@ export const AR_APP_LOGIN_URL = "https://app.snoodlr.com/ar/login";
 export const WORDPRESS_PLUGIN_URL = "https://wordpress.org/plugins/snoodlr-ai-assistant-for-woocommerce/";
 
 export type SiteLang = "en" | "ar";
+export type LocalizedPublicPath = "/" | "/pricing" | "/faq" | "/contact";
 
 export const SITE_URL = "https://snoodlr.com";
 
@@ -10,7 +11,7 @@ export function appLoginUrl(lang: SiteLang = "en") {
   return lang === "ar" ? AR_APP_LOGIN_URL : APP_LOGIN_URL;
 }
 
-export function localizedPath(lang: SiteLang, path: "/" | "/pricing" | "/contact") {
+export function localizedPath(lang: SiteLang, path: LocalizedPublicPath) {
   if (lang === "en") return path;
   return path === "/" ? "/ar/" : `/ar${path}`;
 }
@@ -22,7 +23,7 @@ export function englishPathFromCurrent(path: string) {
 }
 
 export function languageSwitchPath(lang: SiteLang, currentPath: string) {
-  const englishPath = englishPathFromCurrent(currentPath) as "/" | "/pricing" | "/contact";
+  const englishPath = englishPathFromCurrent(currentPath) as LocalizedPublicPath;
   return localizedPath(lang === "ar" ? "en" : "ar", englishPath);
 }
 
